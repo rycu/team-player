@@ -1,0 +1,30 @@
+{
+  "name": "team-player",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "description": "curently in development and unstable!",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rycu/team-player.git"
+  },
+  "author": "Ryan Cutter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rycu/team-player/issues"
+  },
+  "homepage": "https://github.com/rycu/team-player#readme"
+}

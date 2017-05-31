@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './main.css';
+import logo from '../images/logo.svg';
 
 class App extends Component {
   render() {
@@ -8,10 +7,10 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>This will be team-player</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to renode.
+        <p>
+          However, for now it is not a lot.
         </p>
       </div>
     );

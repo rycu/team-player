@@ -38,7 +38,7 @@ export default class FilterByName extends Component {
 		let nameTxt = this.state.nameTxt;
 		//console.log(nameTxt);
 		return (
-			<div className="FilterByName">
+			<div className="player-filter__name">
 
 				<input 
 					type="text" 

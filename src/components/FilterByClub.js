@@ -16,7 +16,7 @@ export default class FilterByClub extends Component {
 	render() {
 		let clubId = this.props.clubId;
 		return (
-			<div className="FilterByClub">
+			<div className="player-filter__club">
 				<select 
 					value={clubId}
 					onChange={this.handleChange}

@@ -1,0 +1,2 @@
+export const ADD_NAME_FILTER = 'ADD_NAME_FILTER'
+export const ADD_CLUB_FILTER = 'ADD_CLUB_FILTER'

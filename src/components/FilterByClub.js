@@ -10,7 +10,7 @@ export default class FilterByClub extends Component {
 	handleChange = e => {
 		const clubId = e.target.value.trim()
 	    this.props.addClubFilter(Number(clubId));
-	    //console.log(this.props);
+	    console.log(this.props);
 	}
 
 	render() {

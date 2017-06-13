@@ -5,7 +5,7 @@ export default class FilterByClub extends Component {
 	
 	static propTypes = {
 		updatePositionFilter: PropTypes.func.isRequired,
-		posArr: PropTypes.array
+		positionArr: PropTypes.array
 	};
 
 	handleChange = e => {
@@ -16,8 +16,8 @@ export default class FilterByClub extends Component {
 
 		var checked;
 
-		if(this.props.posArr){
-	      checked = this.props.posArr.includes(thisVal) ? true : false
+		if(this.props.positionArr){
+	      checked = this.props.positionArr.includes(thisVal) ? true : false
 	    }
 
 		return(

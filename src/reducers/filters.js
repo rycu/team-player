@@ -4,7 +4,8 @@ const initialState =
   {
     filters__name: '',
     filters__club: 0,
-    filters__position: ['Striker','Midfielder','Defender','Goalkeeper']
+    filters__position: ['Striker','Midfielder','Defender','Goalkeeper'],
+    filters__price: {lowVal: 1, highVal: 19} 
 
   };
 
@@ -41,21 +42,21 @@ export default function filters(state = initialState, action) {
 
 		case UPDATE_POSITION_FILTER:
 
-			var newPosArr = state.filters__position.slice();
+			var newpositionArr = state.filters__position.slice();
 
 			if(action.checked === false){
-				var i = newPosArr.indexOf(action.id);
+				var i = newpositionArr.indexOf(action.id);
 				if(i !== -1) {
-					newPosArr.splice(i, 1);
+					newpositionArr.splice(i, 1);
 				}
 			}else{
-				newPosArr.push(action.id);
+				newpositionArr.push(action.id);
 			}
 
 			console.log(action.id);
 
 			return Object.assign({}, state, {
-				filters__position: newPosArr
+				filters__position: newpositionArr
 			})
 
 

@@ -490,3 +490,6 @@ body {
   padding: 0;
   position: absolute;
   width: 1px; }
+
+.player-filters__price input {
+  display: block; }

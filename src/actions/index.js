@@ -24,11 +24,11 @@ export const updatePositionFilter = (checked, id) => ({
 			id
 })
 
-export const updatePriceFilter = (lowVal, highVal) => ({ 
+export const updatePriceFilter = (id, newPriceObj) => ({ 
 			
 			type: types.UPDATE_PRICE_FILTER, 
-			lowVal,
-			highVal
+			id,
+			newPriceObj
 })
 
 

@@ -1,4 +1,4 @@
-import { UPDATE_NAME_FILTER, UPDATE_CLUB_FILTER, UPDATE_POSITION_FILTER } from '../constants/ActionTypes'
+import { UPDATE_NAME_FILTER, UPDATE_CLUB_FILTER, UPDATE_POSITION_FILTER, UPDATE_PRICE_FILTER } from '../constants/ActionTypes'
 
 const initialState = 
   {
@@ -6,7 +6,6 @@ const initialState =
     filters__club: 0,
     filters__position: ['Striker','Midfielder','Defender','Goalkeeper'],
     filters__price: {lowVal: 1, highVal: 19} 
-
   };
 
 //ES6 default arguments syntax for state arg
@@ -58,6 +57,22 @@ export default function filters(state = initialState, action) {
 			return Object.assign({}, state, {
 				filters__position: newpositionArr
 			})
+
+
+		case UPDATE_PRICE_FILTER:
+
+			let lowVal = action.newPriceObj.lowVal;
+			let highVal = action.newPriceObj.highVal;
+
+			// if(action.id === 'low' && (lowVal >= highVal)) {
+			// 	lowVal = action.lowVal;
+			// }else if(action.id === 'high' && (highVal <= lowVal)){
+			// 	lowVal = action.highVal;
+			// }
+
+			return Object.assign({}, state, {
+				filters__price: {lowVal: lowVal, highVal: highVal} 
+			})	
 
 
 		default:

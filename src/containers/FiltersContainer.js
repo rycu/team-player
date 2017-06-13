@@ -8,7 +8,7 @@ import FilterByPosition from '../components/FilterByPosition';
 import FilterByPrice from '../components/FilterByPrice';
 
 //LATER SET TO ONLY CALL FILTERS
-import { updateNameFilter, updateClubFilter, updatePositionFilter} from '../actions'
+import { updateNameFilter, updateClubFilter, updatePositionFilter, updatePriceFilter} from '../actions'
 
 
 const FiltersContainer = ({filterState, actions}) => (
@@ -31,7 +31,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators({ updateNameFilter, updateClubFilter, updatePositionFilter}, dispatch)
+    actions: bindActionCreators({ updateNameFilter, updateClubFilter, updatePositionFilter, updatePriceFilter}, dispatch)
 })
 
 export default connect(

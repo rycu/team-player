@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class FilterByPrice extends Component {
 	static propTypes = {
-		//updatePriceFilter: PropTypes.func.isRequired,
+		updatePriceFilter: PropTypes.func.isRequired,
 		priceObj: PropTypes.object
 	}
 
@@ -17,15 +17,17 @@ export default class FilterByPrice extends Component {
 		let lowVal = this.state.lowVal;
 		let highVal = this.state.highVal;
 
-		if(id === 'low' && (lowVal >= highVal)) {
+		if(id === 'low' && (lowVal > highVal)) {
 			this.setState({ 
 				highVal: lowVal
 			})
-		}else if(id === 'high' && (highVal <= lowVal)){
+		}else if(id === 'high' && (highVal < lowVal)){
 			this.setState({ 
 				lowVal: highVal
 			})
 		}
+
+		return {highVal: highVal, lowVal: lowVal}
 	}
 
 	updateState(id, value){
@@ -40,27 +42,14 @@ export default class FilterByPrice extends Component {
 	}
 
 	handleSubmit = e => {
-	    
-		//Add overlapCorrect to reducer to ensure no errors
-	    this.overlapCorrect(e.target.id);
-	    
-	    console.log(this.state);
-	    
-	    if(this.state.lowVal > this.state.highVal){
-	    	console.log('OVERLAP ERROR');
-	    }
-
-	    //this.props.updatePriceFilter(e.target.low, e.target.high);
-	    //console.log('SUB: '+e.target.value);
-
-	    
+	    this.props.updatePriceFilter(e.target.id, this.overlapCorrect(e.target.id));
 	}
 
 	render() {
 
 		let lowVal = this.state.lowVal;
 		let highVal = this.state.highVal;
-
+		// WORK OUT HOW TO PRIORITISE REDUX CHANGES  
 
 		return (
 			<div className="player-filters__price">

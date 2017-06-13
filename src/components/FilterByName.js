@@ -6,7 +6,7 @@ export default class FilterByName extends Component {
 
 
 	static propTypes = {
-		//addNameFilter: PropTypes.func.isRequired,
+		//updateNameFilter: PropTypes.func.isRequired,
 		nameTxt: PropTypes.string,
 		placeholder: PropTypes.string
 	};
@@ -22,7 +22,7 @@ export default class FilterByName extends Component {
 	handleSubmit = e => {
 	    const nameTxt = e.target.value.trim()
 	    if (e.which === 13) {
-	      this.props.addNameFilter(nameTxt);
+	      this.props.updateNameFilter(nameTxt);
 	    }
 
 	}
@@ -38,7 +38,7 @@ export default class FilterByName extends Component {
 		let nameTxt = this.state.nameTxt;
 		//console.log(nameTxt);
 		return (
-			<div className="player-filter__name">
+			<div className="player-filters__name">
 
 				<input 
 					type="text" 

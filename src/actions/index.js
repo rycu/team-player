@@ -1,26 +1,36 @@
 import * as types from '../constants/ActionTypes'
 
 //ACTION CREATOR (func)
-export const addNameFilter = nameTxt => (
+export const updateNameFilter = nameTxt => (
 		
 		//ACTION (obj)
 		{ 
 			//ACTION TYPE (type: requied prop, nameTxt: val sting)
-			type: types.ADD_NAME_FILTER, 
+			type: types.UPDATE_NAME_FILTER, 
 			nameTxt 
 		}
 )
 
-export const addClubFilter = clubId => ({ 
+export const updateClubFilter = clubId => ({ 
 
-			type: types.ADD_CLUB_FILTER, 
+			type: types.UPDATE_CLUB_FILTER, 
 			clubId
 })
 
-export const addPositionFilter = (checked, id) => ({ 
+export const updatePositionFilter = (checked, id) => ({ 
 			
-			type: types.ADD_POSITION_FILTER, 
+			type: types.UPDATE_POSITION_FILTER, 
 			checked,
 			id
 })
+
+export const updatePriceFilter = (lowVal, highVal) => ({ 
+			
+			type: types.UPDATE_PRICE_FILTER, 
+			lowVal,
+			highVal
+})
+
+
+
 

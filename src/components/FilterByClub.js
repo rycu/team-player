@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 
 export default class FilterByClub extends Component {
 	static propTypes = {
-		addClubFilter: PropTypes.func.isRequired,
+		updateClubFilter: PropTypes.func.isRequired,
 		clubId: PropTypes.number
 	};
 
 	handleChange = e => {
 		const clubId = e.target.value.trim()
-	    this.props.addClubFilter(Number(clubId));
+	    this.props.updateClubFilter(Number(clubId));
 	    console.log(this.props);
 	}
 
 	render() {
 		let clubId = this.props.clubId;
 		return (
-			<div className="player-filter__club">
+			<div className="player-filters__club">
 				<select 
 					value={clubId}
 					onChange={this.handleChange}

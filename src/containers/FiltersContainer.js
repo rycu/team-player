@@ -7,14 +7,14 @@ import FilterByClub from '../components/FilterByClub';
 import FilterByPosition from '../components/FilterByPosition';
 
 //LATER SET TO ONLY CALL FILTERS
-import { addNameFilter, addClubFilter, addPositionFilter} from '../actions'
+import { updateNameFilter, updateClubFilter, updatePositionFilter} from '../actions'
 
 
 const FiltersContainer = ({filterState, actions}) => (
     <div>
-    	<FilterByName nameTxt={filterState.filter__name} addNameFilter={actions.addNameFilter} placeholder="Search for player by name"/>
-      <FilterByClub clubId={filterState.filter__club} addClubFilter={actions.addClubFilter} />
-      <FilterByPosition posArr={filterState.filter__position} addPositionFilter={actions.addPositionFilter} />
+    	<FilterByName nameTxt={filterState.filters__name} updateNameFilter={actions.updateNameFilter} placeholder="Search for player by name"/>
+      <FilterByClub clubId={filterState.filters__club} updateClubFilter={actions.updateClubFilter} />
+      <FilterByPosition posArr={filterState.filters__position} updatePositionFilter={actions.updatePositionFilter} />
     </div>
 )
 
@@ -29,7 +29,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators({ addNameFilter, addClubFilter, addPositionFilter}, dispatch)
+    actions: bindActionCreators({ updateNameFilter, updateClubFilter, updatePositionFilter}, dispatch)
 })
 
 export default connect(

@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 export default class FilterByClub extends Component {
 	
 	static propTypes = {
-		addPositionFilter: PropTypes.func.isRequired,
+		updatePositionFilter: PropTypes.func.isRequired,
 		posArr: PropTypes.array
 	};
 
 	handleChange = e => {
-		this.props.addPositionFilter(e.target.checked, e.target.id);		
+		this.props.updatePositionFilter(e.target.checked, e.target.id);		
 	}
 
 	renderCheckbox(thisVal){
@@ -30,7 +30,7 @@ export default class FilterByClub extends Component {
 
 	buildPosBoxes(){
 
-		var positions = ['S','M','D','G'];
+		var positions = ['Striker','Midfielder','Defender','Goalkeeper'];
 		var rows = [];
 		var self = this;
 
@@ -49,7 +49,7 @@ export default class FilterByClub extends Component {
 	render() {
 
 		return (
-			<div className="player-filter__position">
+			<div className="player-filters__position">
 				{this.buildPosBoxes()}
 			</div>
     	);

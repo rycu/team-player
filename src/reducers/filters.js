@@ -1,10 +1,10 @@
-import { ADD_NAME_FILTER, ADD_CLUB_FILTER, ADD_POSITION_FILTER } from '../constants/ActionTypes'
+import { UPDATE_NAME_FILTER, UPDATE_CLUB_FILTER, UPDATE_POSITION_FILTER } from '../constants/ActionTypes'
 
 const initialState = 
   {
-    filter__name: '',
-    filter__club: 0,
-    filter__position: ['S','M','D','G']
+    filters__name: '',
+    filters__club: 0,
+    filters__position: ['Striker','Midfielder','Defender','Goalkeeper']
 
   };
 
@@ -12,11 +12,11 @@ const initialState =
 export default function filters(state = initialState, action) {
 	switch (action.type) {
 
-		case ADD_NAME_FILTER:
+		case UPDATE_NAME_FILTER:
 
 			// using ES6 method Object.assign()
 			return Object.assign({}, state, {
-				filter__name: action.nameTxt
+				filters__name: action.nameTxt
 			})
 
 			// return
@@ -32,16 +32,16 @@ export default function filters(state = initialState, action) {
 			// 	}
 			// 
 
-		case ADD_CLUB_FILTER:
+		case UPDATE_CLUB_FILTER:
 
 			return Object.assign({}, state, {
-				filter__club: action.clubId
+				filters__club: action.clubId
 			})
 
 
-		case ADD_POSITION_FILTER:
+		case UPDATE_POSITION_FILTER:
 
-			var newPosArr = state.filter__position.slice();
+			var newPosArr = state.filters__position.slice();
 
 			if(action.checked === false){
 				var i = newPosArr.indexOf(action.id);
@@ -55,7 +55,7 @@ export default function filters(state = initialState, action) {
 			console.log(action.id);
 
 			return Object.assign({}, state, {
-				filter__position: newPosArr
+				filters__position: newPosArr
 			})
 
 

@@ -19,10 +19,12 @@ export default class FilterByPrice extends Component {
 
 		if(id === 'low' && (lowVal > highVal)) {
 			this.setState({ 
+				lowVal: lowVal,
 				highVal: lowVal
 			})
 		}else if(id === 'high' && (highVal < lowVal)){
 			this.setState({ 
+				highVal: highVal,
 				lowVal: highVal
 			})
 		}
@@ -39,10 +41,18 @@ export default class FilterByPrice extends Component {
 
 	handleChange = e => {
 		this.updateState(e.target.id, e.target.value);
+		console.log('handleChange');
 	}
 
 	handleSubmit = e => {
-	    this.props.updatePriceFilter(e.target.id, this.overlapCorrect(e.target.id));
+		this.overlapCorrect(e.target.id);
+	    
+		//GETTING MIXED UP 
+	    this.props.updatePriceFilter(
+	    		e.target.id, 
+	    		this.state.lowVal, 
+	    		this.state.highVal
+	    );
 	}
 
 	render() {

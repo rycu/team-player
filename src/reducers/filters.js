@@ -61,8 +61,8 @@ export default function filters(state = initialState, action) {
 
 		case UPDATE_PRICE_FILTER:
 
-			let lowVal = action.newPriceObj.lowVal;
-			let highVal = action.newPriceObj.highVal;
+			let lowVal = action.lowVal;
+			let highVal = action.highVal;
 
 			// if(action.id === 'low' && (lowVal >= highVal)) {
 			// 	lowVal = action.lowVal;

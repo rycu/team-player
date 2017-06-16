@@ -27,9 +27,11 @@ export default class FilterByPrice extends Component {
 				highVal: highVal,
 				lowVal: highVal
 			})
+		}else if (id !== 'low' && id !== 'high'){
+			console.log('overlapCorrect bad ID: '+ id);
 		}
-
-		return {highVal: highVal, lowVal: lowVal}
+		//return {highVal: highVal, lowVal: lowVal}
+		
 	}
 
 	updateState(id, value){
@@ -41,25 +43,34 @@ export default class FilterByPrice extends Component {
 
 	handleChange = e => {
 		this.updateState(e.target.id, e.target.value);
-		console.log('handleChange');
 	}
 
 	handleSubmit = e => {
-		this.overlapCorrect(e.target.id);
-	    
-		//GETTING MIXED UP 
-	    this.props.updatePriceFilter(
-	    		e.target.id, 
+		
+		let id = e.target.id;
+
+		//PROMICE ADDED TO WAIT FOR overlapCorrect() TO COMPLEATE BEFORE STORE UPDATE
+		let overlapSubmitPromice = new Promise((resolve, reject) => {
+				resolve(this.overlapCorrect(id));
+				reject('overlapCorrect Failed');
+		})
+
+		overlapSubmitPromice.then(() =>{	
+			this.props.updatePriceFilter(
+	    		id, 
 	    		this.state.lowVal, 
 	    		this.state.highVal
-	    );
+	    	);
+		})
+		.catch((err) =>{
+			console.log(err);
+		});
 	}
 
 	render() {
 
 		let lowVal = this.state.lowVal;
 		let highVal = this.state.highVal;
-		// WORK OUT HOW TO PRIORITISE REDUX CHANGES  
 
 		return (
 			<div className="player-filters__price">

@@ -491,5 +491,30 @@ body {
   position: absolute;
   width: 1px; }
 
-.player-filters__price input {
-  display: block; }
+.player-filters__price {
+  position: relative; }
+  .player-filters__price input {
+    position: absolute; }
+  .player-filters__price input[type=range] {
+    pointer-events: none;
+    -webkit-appearance: none; }
+  .player-filters__price input[type=range]::-webkit-slider-thumb {
+    pointer-events: auto; }
+  .player-filters__price input[type=range]::-webkit-slider-runnable-track {
+    height: 0.01em;
+    background: transparent;
+    border: none; }
+  .player-filters__price input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 1em;
+    width: 0.5em;
+    background: black;
+    margin-top: -4px; }
+  .player-filters__price input[type=range]:focus {
+    outline: none; }
+  .player-filters__price input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc; }
+  .player-filters__price label {
+    position: absolute;
+    top: 1em; }

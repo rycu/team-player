@@ -97,6 +97,9 @@ export default class FilterByPrice extends Component {
 					onMouseUp={this.handleSubmit}
 					onKeyUp={this.handleSubmit}
 				/>
+
+				<label>{lowVal}M to {highVal}M</label>
+
 			</div>
     	);
 	}

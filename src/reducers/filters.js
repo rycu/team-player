@@ -10,8 +10,8 @@ const initialState =
     filters__name: '',
     filters__club: 0,
     filters__position: ['Striker','Midfielder','Defender','Goalkeeper'],
-    filters__price: {lowVal: 1, highVal: 19},
-    filters__rank: {lowVal: 1, highVal: 19} 
+    filters__price: {lowVal: 5, highVal: 20},
+    filters__rank: {lowVal: 20, highVal: 100} 
   };
 
 //ES6 default arguments syntax for state arg

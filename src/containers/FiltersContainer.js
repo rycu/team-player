@@ -47,6 +47,17 @@ const FiltersContainer = ({filterState, actions}) => (
         unit={'M'}
       />
 
+      <DualRange 
+        componentId={'rank'}
+        rangeObj={filterState.filters__rank} 
+        updateRangeFilter={actions.updateDualRangeFilter}
+        min={0} 
+        max={100}
+        step={0.1}
+        gap={2}
+        unit={''}
+      />
+
     </div>
 )
 

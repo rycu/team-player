@@ -508,7 +508,7 @@ body {
     -webkit-appearance: none;
     border: none;
     height: 1em;
-    width: 0.5em;
+    width: 0.3em;
     background: black;
     margin-top: -4px; }
   .player-filters__price input[type=range]:focus {

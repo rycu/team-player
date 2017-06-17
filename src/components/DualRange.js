@@ -59,6 +59,7 @@ export default class dualRange extends Component {
 	}
 
 	handleChange = e => {
+
 		this.updateState(e.target.id, e.target.value);
 	}
 
@@ -90,13 +91,24 @@ export default class dualRange extends Component {
 
 	render() {
 
-		//console.log(this.test);
+		
 
 		let lowVal = this.state.lowVal;
 		let highVal = this.state.highVal;
 
+		
+
 		return (
 			<div className={"dual-range player-filters__" + this.props.componentId}>
+				
+				<svg className="dual-range__out-of-range" width="100%" height="100%">
+				  <rect width={((lowVal/this.props.max)*100)+'%'} height="100" />
+				</svg>
+
+				<svg className="dual-range__out-of-range" width="100%" height="100%">
+				  <rect width={(100-((highVal/this.props.max))*100)+'%'} height="100" x={((highVal/this.props.max)*100)+'%'}  />
+				</svg>
+
 				<input className="dual-range__inputs"
 					id="low" 
 					type="range" 
@@ -119,7 +131,9 @@ export default class dualRange extends Component {
 					onMouseUp={this.handleSubmit}
 					onKeyUp={this.handleSubmit}
 				/>
+
 				<label className="dual-range__label">{this.lableRound(lowVal)+this.props.unit} to {this.lableRound(highVal)+this.props.unit}</label>
+
 			</div>
     	);
 	}

@@ -53,8 +53,8 @@ const FiltersContainer = ({filterState, actions}) => (
         updateRangeFilter={actions.updateDualRangeFilter}
         min={0} 
         max={100}
-        step={0.1}
-        gap={2}
+        step={1}
+        gap={10}
         unit={''}
       />
 

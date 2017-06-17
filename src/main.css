@@ -492,30 +492,42 @@ body {
   width: 1px; }
 
 .dual-range {
+  background-color: red;
   position: relative;
   height: 3em;
-  margin-top: 1em; }
+  margin: 5%;
+  width: 90%; }
   .dual-range .dual-range__inputs {
+    width: 100%;
     position: absolute;
     pointer-events: none;
     -webkit-appearance: none; }
     .dual-range .dual-range__inputs::-webkit-slider-thumb {
       pointer-events: auto; }
     .dual-range .dual-range__inputs::-webkit-slider-runnable-track {
-      height: 0.01em;
-      background: transparent;
+      height: 0.001em;
+      background: none;
       border: none; }
     .dual-range .dual-range__inputs::-webkit-slider-thumb {
+      z-index: 100;
       -webkit-appearance: none;
       border: none;
-      height: 1em;
-      width: 0.3em;
-      background: black;
-      margin-top: -4px; }
+      height: 2.99em;
+      width: 5%;
+      background: darkred;
+      margin-top: 0.001em; }
     .dual-range .dual-range__inputs:focus {
       outline: none; }
     .dual-range .dual-range__inputs:focus::-webkit-slider-runnable-track {
-      background: #ccc; }
+      background: none; }
   .dual-range .dual-range__label {
+    pointer-events: none;
     position: absolute;
-    top: 1em; }
+    width: 100%;
+    text-align: center;
+    top: 30%;
+    color: black; }
+  .dual-range .dual-range__out-of-range {
+    position: absolute; }
+    .dual-range .dual-range__out-of-range rect {
+      fill: rgba(0, 0, 0, 0.35); }

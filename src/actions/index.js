@@ -24,13 +24,15 @@ export const updatePositionFilter = (checked, id) => ({
 			id
 })
 
-export const updatePriceFilter = (id, lowVal, highVal) => ({ 
+export const updateDualRangeFilter = (componentId, lowVal, highVal) => ({ 
 			
-			type: types.UPDATE_PRICE_FILTER, 
-			id,
+			type: types.UPDATE_DUAL_RANGE_FILTER, 
+			componentId,
 			lowVal,
 			highVal
 })
+
+
 
 
 

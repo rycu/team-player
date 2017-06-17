@@ -1,24 +1,21 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 
-export default class FilterByPrice extends Component {
+export default class dualRange extends Component {
 	static propTypes = {
-		updatePriceFilter: PropTypes.func.isRequired,
-		priceObj: PropTypes.object
+		updateRangeFilter: PropTypes.func.isRequired,
+		rangeObj: PropTypes.object.isRequired,
+		componentId: PropTypes.string.isRequired,
+		min: PropTypes.number.isRequired, 
+		max: PropTypes.number.isRequired,
+		step: PropTypes.number.isRequired,
+		gap: PropTypes.number.isRequired,
+		unit: PropTypes.string
 	}
 
 	state = {
-	    lowVal: this.props.priceObj.lowVal,
-	    highVal: this.props.priceObj.highVal
-	}
-
-	instanceProps = {
-
-		min: 0, 
-		max: 20,
-		step: 0.1,
-		gap: 2
-
+	    lowVal: this.props.rangeObj.lowVal,
+	    highVal: this.props.rangeObj.highVal
 	}
 
 	overlapCorrect(id){
@@ -26,15 +23,15 @@ export default class FilterByPrice extends Component {
 		let lowVal = this.state.lowVal;
 		let highVal = this.state.highVal;
 
-		if(id === 'low' && ((lowVal+this.instanceProps.gap) > highVal)) {
+		if(id === 'low' && ((lowVal+this.props.gap) > highVal)) {
 			this.setState({ 
 				lowVal: lowVal,
-				highVal: lowVal+this.instanceProps.gap
+				highVal: lowVal+this.props.gap
 			})
-		}else if(id === 'high' && ((highVal-this.instanceProps.gap) < lowVal)){
+		}else if(id === 'high' && ((highVal-this.props.gap) < lowVal)){
 			this.setState({ 
 				highVal: highVal,
-				lowVal: highVal-this.instanceProps.gap
+				lowVal: highVal-this.props.gap
 			})
 		}else if (id !== 'low' && id !== 'high'){
 			console.log('overlapCorrect bad ID: '+ id);
@@ -45,12 +42,12 @@ export default class FilterByPrice extends Component {
 
 	updateState(id, value){
 
-		let lowMax = this.instanceProps.max-this.instanceProps.gap;
-		let highMin = this.instanceProps.min+this.instanceProps.gap;
+		let lowMax = this.props.max-this.props.gap;
+		let highMin = this.props.min+this.props.gap;
 		
 		if(
-			(id === 'low' && value >= this.instanceProps.min && value <= lowMax) ||
-			(id === 'high' && value >= highMin && value <= this.instanceProps.max)
+			(id === 'low' && value >= this.props.min && value <= lowMax) ||
+			(id === 'high' && value >= highMin && value <= this.props.max)
 			){
 			this.setState({ 
 					[id+'Val']: parseFloat(value)
@@ -76,8 +73,8 @@ export default class FilterByPrice extends Component {
 		})
 
 		overlapSubmitPromice.then(() =>{	
-			this.props.updatePriceFilter(
-	    		id, 
+			this.props.updateRangeFilter(
+	    		this.props.componentId,
 	    		this.state.lowVal, 
 	    		this.state.highVal
 	    	);
@@ -99,33 +96,30 @@ export default class FilterByPrice extends Component {
 		let highVal = this.state.highVal;
 
 		return (
-			<div className="player-filters__price">
-				<input 
+			<div className={"dual-range player-filters__" + this.props.componentId}>
+				<input className="dual-range__inputs"
 					id="low" 
 					type="range" 
-					min={this.instanceProps.min} 
-					max={this.instanceProps.max} 
-					step={this.instanceProps.step}
+					min={this.props.min} 
+					max={this.props.max} 
+					step={this.props.step}
 					value={lowVal}
 					onChange={this.handleChange} 
 					onMouseUp={this.handleSubmit}
 					onKeyUp={this.handleSubmit}
-				/>
-				
-				<input 
+				/>	
+				<input className="dual-range__inputs"
 					id="high" 
 					type="range" 
-					min={this.instanceProps.min} 
-					max={this.instanceProps.max} 
-					step={this.instanceProps.step} 
+					min={this.props.min} 
+					max={this.props.max} 
+					step={this.props.step} 
 					value={highVal}
 					onChange={this.handleChange} 
 					onMouseUp={this.handleSubmit}
 					onKeyUp={this.handleSubmit}
 				/>
-
-				<label>{this.lableRound(lowVal)}M to {this.lableRound(highVal)}M</label>
-
+				<label className="dual-range__label">{this.lableRound(lowVal)+this.props.unit} to {this.lableRound(highVal)+this.props.unit}</label>
 			</div>
     	);
 	}

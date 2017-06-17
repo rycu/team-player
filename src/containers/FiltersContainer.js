@@ -5,18 +5,48 @@ import { connect } from 'react-redux';
 import FilterByName from '../components/FilterByName';
 import FilterByClub from '../components/FilterByClub';
 import FilterByPosition from '../components/FilterByPosition';
-import FilterByPrice from '../components/FilterByPrice';
+
+import DualRange from '../components/DualRange';
 
 //LATER SET TO ONLY CALL FILTERS
-import { updateNameFilter, updateClubFilter, updatePositionFilter, updatePriceFilter} from '../actions'
+import { 
+  updateNameFilter, 
+  updateClubFilter, 
+  updatePositionFilter, 
+  updateDualRangeFilter
+} from '../actions'
 
 
 const FiltersContainer = ({filterState, actions}) => (
     <div>
-    	<FilterByName nameTxt={filterState.filters__name} updateNameFilter={actions.updateNameFilter} placeholder="Search for player by name"/>
-      <FilterByClub clubId={filterState.filters__club} updateClubFilter={actions.updateClubFilter} />
-      <FilterByPosition positionArr={filterState.filters__position} updatePositionFilter={actions.updatePositionFilter} />
-      <FilterByPrice priceObj={filterState.filters__price} updatePriceFilter={actions.updatePriceFilter} />
+
+    	<FilterByName 
+        nameTxt={filterState.filters__name} 
+        updateNameFilter={actions.updateNameFilter} 
+        placeholder="Search for player by name"
+      />
+
+      <FilterByClub 
+        clubId={filterState.filters__club} 
+        updateClubFilter={actions.updateClubFilter} 
+      />
+
+      <FilterByPosition 
+        positionArr={filterState.filters__position} 
+        updatePositionFilter={actions.updatePositionFilter} 
+      />
+
+      <DualRange 
+        componentId={'price'}
+        rangeObj={filterState.filters__price} 
+        updateRangeFilter={actions.updateDualRangeFilter}
+        min={0} 
+        max={20}
+        step={0.1}
+        gap={2}
+        unit={'M'}
+      />
+
     </div>
 )
 
@@ -31,7 +61,12 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators({ updateNameFilter, updateClubFilter, updatePositionFilter, updatePriceFilter}, dispatch)
+    actions: bindActionCreators({ 
+      updateNameFilter, 
+      updateClubFilter, 
+      updatePositionFilter, 
+      updateDualRangeFilter
+    }, dispatch)
 })
 
 export default connect(

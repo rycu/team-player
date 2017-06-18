@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 export default class FilterByName extends Component {
 	
-
-
 	static propTypes = {
 		//updateNameFilter: PropTypes.func.isRequired,
 		nameTxt: PropTypes.string,

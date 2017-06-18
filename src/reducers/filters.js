@@ -1,13 +1,14 @@
 import { 
 	UPDATE_NAME_FILTER, 
 	UPDATE_CLUB_FILTER, 
-	UPDATE_POSITION_FILTER, 
-	UPDATE_DUAL_RANGE_FILTER
+	UPDATE_POSITION_FILTER,
+	UPDATE_DUAL_RANGE_FILTER,
+	RESET_FILTERS
 } from '../constants/ActionTypes'
 
 const initialState = 
   {
-    filters__name: '',
+    filters__name: 'poo',
     filters__club: 0,
     filters__position: ['Striker','Midfielder','Defender','Goalkeeper'],
     filters__price: {lowVal: 2, highVal: 15},
@@ -74,6 +75,12 @@ export default function filters(state = initialState, action) {
 				['filters__'+action.componentId]: {lowVal: lowVal, highVal: highVal} 
 			})
 
+
+		case RESET_FILTERS:
+
+			return Object.assign({}, state, 
+				initialState 
+			)
 
 		default:
       		return state

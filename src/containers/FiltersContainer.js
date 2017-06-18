@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import FilterByName from '../components/FilterByName';
 import FilterByClub from '../components/FilterByClub';
 import FilterByPosition from '../components/FilterByPosition';
-
+import Button from '../components/Button';
 import DualRange from '../components/DualRange';
 
 //LATER SET TO ONLY CALL FILTERS
@@ -13,7 +13,8 @@ import {
   updateNameFilter, 
   updateClubFilter, 
   updatePositionFilter, 
-  updateDualRangeFilter
+  updateDualRangeFilter,
+  resetFilters
 } from '../actions'
 
 
@@ -58,6 +59,12 @@ const FiltersContainer = ({filterState, actions}) => (
         unit={''}
       />
 
+      <Button
+        clickFunc={actions.resetFilters}
+        text={'Reset All Filters'}
+        class={'player-filters__reset'}
+      />
+
     </div>
 )
 
@@ -76,7 +83,8 @@ const mapDispatchToProps = dispatch => ({
       updateNameFilter, 
       updateClubFilter, 
       updatePositionFilter, 
-      updateDualRangeFilter
+      updateDualRangeFilter,
+      resetFilters
     }, dispatch)
 })
 

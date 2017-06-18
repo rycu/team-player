@@ -32,8 +32,7 @@ export const updateDualRangeFilter = (componentId, lowVal, highVal) => ({
 			highVal
 })
 
-
-
-
-
-
+export const resetFilters = () => ({ 
+			
+			type: types.RESET_FILTERS, 
+})

@@ -91,12 +91,9 @@ export default class dualRange extends Component {
 
 	render() {
 
-		
-
 		let lowVal = this.state.lowVal;
 		let highVal = this.state.highVal;
 
-		
 
 		return (
 			<div className={"dual-range player-filters__" + this.props.componentId}>

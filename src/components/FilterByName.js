@@ -17,23 +17,14 @@ export default class FilterByName extends Component {
 	    nameTxt: this.props.nameTxt || ''
 	}
 
-	handleSubmit = e => {
-	    const nameTxt = e.target.value.trim()
-	    if (e.which === 13) {
-	      this.props.updateNameFilter(nameTxt);
-	    }
-
-	}
-
 	handleChange = e => {
-		this.setState({ nameTxt: e.target.value })
-		//console.log(e.target.value);
-		//console.log(this.props);
+	    const nameTxt = e.target.value.trim();
+	    this.props.updateNameFilter(nameTxt);
 	}
 
 	render() {
 		let placeholder = this.props.placeholder;
-		let nameTxt = this.state.nameTxt;
+		let nameTxt = this.props.nameTxt;
 		//console.log(nameTxt);
 		return (
 			<div className="player-filters__name">
@@ -43,7 +34,6 @@ export default class FilterByName extends Component {
 					placeholder={placeholder}
 					value={nameTxt}
 					onChange={this.handleChange}
-					onKeyDown={this.handleSubmit}
 				/>
 
 			</div>

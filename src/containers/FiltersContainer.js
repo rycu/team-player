@@ -46,9 +46,10 @@ const FiltersContainer = ({filterState, actions}) => (
         step={0.1}
         gap={2}
         unit={'M'}
+        siblingValue={0}
       />
 
-      <DualRange 
+{  /*    <DualRange 
         componentId={'rank'}
         rangeObj={filterState.filters__rank} 
         updateRangeFilter={actions.updateDualRangeFilter}
@@ -57,7 +58,7 @@ const FiltersContainer = ({filterState, actions}) => (
         step={1}
         gap={10}
         unit={''}
-      />
+      /> */}
 
       <Button
         clickFunc={actions.resetFilters}

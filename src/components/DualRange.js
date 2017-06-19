@@ -15,11 +15,12 @@ export default class dualRange extends Component {
 
 	state = {
 	    lowVal: this.props.rangeObj.lowVal,
-	    highVal: this.props.rangeObj.highVal
+	    highVal: this.props.rangeObj.highVal,
+	    ephemeralChange: false
 	}
 
+	//ENSURES CORRECT MINIMUM VALUE RANGE IS MAINTAINED 
 	overlapCorrect(id){
-
 		let lowVal = this.state.lowVal;
 		let highVal = this.state.highVal;
 
@@ -36,33 +37,42 @@ export default class dualRange extends Component {
 		}else if (id !== 'low' && id !== 'high'){
 			console.log('overlapCorrect bad ID: '+ id);
 		}
-		//return {highVal: highVal, lowVal: lowVal}
-		
 	}
 
-	updateState(id, value){
-
+	//UPDATES COMPONENT STATE 
+	updateState(id, value, siblingValue){
 		let lowMax = this.props.max-this.props.gap;
 		let highMin = this.props.min+this.props.gap;
-		
+		let siblingId = id === 'low' ? 'high' : 'low';
+
 		if(
+			//ONLY UPDATE THUMB WITHIN LIMITS
 			(id === 'low' && value >= this.props.min && value <= lowMax) ||
 			(id === 'high' && value >= highMin && value <= this.props.max)
 			){
-			this.setState({ 
-					[id+'Val']: parseFloat(value)
+			this.setState({
+					[id+'Val']: parseFloat(value),
+					[siblingId+'Val']: parseFloat(siblingValue),
+					ephemeralChange: true
 			})
 		}
-
-
 		this.overlapCorrect(id);
 	}
 
 	handleChange = e => {
-
-		this.updateState(e.target.id, e.target.value);
+		this.updateState(e.target.id, e.target.value, e.target.dataset.siblingvalue);
 	}
 
+	//ROUND FLOATING POINTS FOR STEPS LESS THAN 1
+	valueRound(value){
+		if (this.props.step<1) {
+			return Math.round( value * (1/this.props.step) ) / (1/this.props.step);
+		}else{
+			return value;
+		}
+	}
+
+	//UPDATES REDUX STORE
 	handleSubmit = e => {
 		
 		let id = e.target.id;
@@ -76,17 +86,16 @@ export default class dualRange extends Component {
 		overlapSubmitPromice.then(() =>{	
 			this.props.updateRangeFilter(
 	    		this.props.componentId,
-	    		this.state.lowVal, 
-	    		this.state.highVal
+	    		this.valueRound(this.state.lowVal), 
+	    		this.valueRound(this.state.highVal)
 	    	);
+	    	this.setState({
+				ephemeralChange: false,
+			})
 		})
 		.catch((err) =>{
 			console.log(err);
 		});
-	}
-
-	lableRound(value){
-		return Math.round( value * 10 ) / 10;
 	}
 
 	render() {
@@ -94,18 +103,31 @@ export default class dualRange extends Component {
 		let lowVal = this.state.lowVal;
 		let highVal = this.state.highVal;
 
+		//GETS NEW STATE FROM REDUX IF CHANGE ISN'T EPHEMERAL
+		if(!this.state.ephemeralChange){
+			lowVal = this.props.rangeObj.lowVal;
+			highVal = this.props.rangeObj.highVal;
+		}
 
 		return (
 			<div className={"dual-range player-filters__" + this.props.componentId}>
 				
+				{/*SVG USED TO DISPLAY OUT OF RANGE AREAS*/}
 				<svg className="dual-range__out-of-range" width="100%" height="100%">
-				  <rect width={((lowVal/this.props.max)*100)+'%'} height="100" />
+					<rect 
+				  		width={((lowVal/this.props.max)*100)+'%'} 
+				  		height="100" 
+					/>
+				</svg>
+				<svg className="dual-range__out-of-range" width="100%" height="100%">
+					<rect 
+				  		width={(100-((highVal/this.props.max))*100)+'%'} 
+				  		height="100" 
+				  		x={((highVal/this.props.max)*100)+'%'}  
+				  	/>
 				</svg>
 
-				<svg className="dual-range__out-of-range" width="100%" height="100%">
-				  <rect width={(100-((highVal/this.props.max))*100)+'%'} height="100" x={((highVal/this.props.max)*100)+'%'}  />
-				</svg>
-
+				{/*LOWER RANGE SLIDER*/}
 				<input className="dual-range__inputs"
 					id="low" 
 					type="range" 
@@ -113,10 +135,13 @@ export default class dualRange extends Component {
 					max={this.props.max} 
 					step={this.props.step}
 					value={lowVal}
+					data-siblingvalue={highVal}
 					onChange={this.handleChange} 
 					onMouseUp={this.handleSubmit}
 					onKeyUp={this.handleSubmit}
-				/>	
+				/>
+
+				{/*HIGHER RANGE SLIDER*/}
 				<input className="dual-range__inputs"
 					id="high" 
 					type="range" 
@@ -124,13 +149,18 @@ export default class dualRange extends Component {
 					max={this.props.max} 
 					step={this.props.step} 
 					value={highVal}
+					data-siblingvalue={lowVal}
 					onChange={this.handleChange} 
 					onMouseUp={this.handleSubmit}
 					onKeyUp={this.handleSubmit}
 				/>
 
-				<label className="dual-range__label">{this.lableRound(lowVal)+this.props.unit} to {this.lableRound(highVal)+this.props.unit}</label>
-
+				{/*OUTPUT LABEL*/}
+				<label className="dual-range__label">{
+					this.valueRound(lowVal)+this.props.unit
+					} to {
+					this.valueRound(highVal)+this.props.unit
+				}</label>
 			</div>
     	);
 	}

@@ -8,7 +8,7 @@ import {
 
 const initialState = 
   {
-    filters__name: 'poo',
+    filters__name: '',
     filters__club: 0,
     filters__position: ['Striker','Midfielder','Defender','Goalkeeper'],
     filters__price: {lowVal: 2, highVal: 15},

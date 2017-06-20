@@ -1,10 +1,9 @@
 
 .dual-range{
-	background-color: red;
+	background-color: gray;
 	position: relative;
-	height: 3em;
-	margin: 5%;
-	width:90%;
+	height: 2em;
+	width:100%;
 
 	.dual-range__inputs {
 		width:100%;
@@ -26,9 +25,9 @@
 			z-index:100;
 		    -webkit-appearance: none;
 		    border: none;
-		    height: 2.99em;
+		    height: 1.99em;
 		    width: 5%;
-		    background: darkred;
+		    background: darkgray;
 		    margin-top: 0.001em;
 		}
 
@@ -46,7 +45,7 @@
 		position: absolute;
 		width: 100%;
 		text-align: center;
-		top: 30%;
+		top: 0.35em;
 		color: black;
 	}
 

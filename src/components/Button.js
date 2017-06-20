@@ -13,7 +13,7 @@ export default class Button extends Component {
 
 	render() {
 		return (
-			<div className={this.props.class}>
+			<div className={this.props.className}>
 				<button
 					onClick={() => this.handleClick()}
 				>

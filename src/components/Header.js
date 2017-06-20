@@ -6,8 +6,7 @@ export default class Header extends Component {
     return (      
       <div className="header">
         {/*<IconLogo FillColor="lime"/>*/}
-        <h2>This will be team-player</h2>
-        <p>However, for now it is not a lot.</p>
+        <h2>team-player (in production)</h2>
       </div>
     );
   }

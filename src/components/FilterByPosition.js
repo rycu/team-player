@@ -49,7 +49,7 @@ export default class FilterByClub extends Component {
 	render() {
 
 		return (
-			<div className="player-filters__position">
+			<div className={this.props.className}>
 				{this.buildPosBoxes()}
 			</div>
     	);

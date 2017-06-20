@@ -13,10 +13,12 @@ import {
   updateNameFilter, 
   updateClubFilter, 
   updatePositionFilter, 
-  updateDualRangeFilter,
+  updatePriceFilter,
+  updateRankFilter,
   resetFilters
 } from '../actions'
 
+let filterClass = 'player-filters';
 
 const FiltersContainer = ({filterState, actions}) => (
     <div>
@@ -25,22 +27,26 @@ const FiltersContainer = ({filterState, actions}) => (
         nameTxt={filterState.filters__name} 
         updateNameFilter={actions.updateNameFilter} 
         placeholder="Search for player by name"
+        className={filterClass +" player-filters__name"}
       />
 
       <FilterByClub 
         clubId={filterState.filters__club} 
-        updateClubFilter={actions.updateClubFilter} 
+        updateClubFilter={actions.updateClubFilter}
+        className={filterClass +" player-filters__club"}
       />
 
       <FilterByPosition 
         positionArr={filterState.filters__position} 
-        updatePositionFilter={actions.updatePositionFilter} 
+        updatePositionFilter={actions.updatePositionFilter}
+        className={filterClass +" player-filters__position"}
       />
 
       <DualRange 
         componentId={'price'}
-        rangeObj={filterState.filters__price} 
-        updateRangeFilter={actions.updateDualRangeFilter}
+        rangeObj={filterState.filters__price}
+        updateRangeFilter={actions.updatePriceFilter}
+        className={filterClass +" player-filters__price"}
         min={0} 
         max={20}
         step={0.1}
@@ -49,21 +55,22 @@ const FiltersContainer = ({filterState, actions}) => (
         siblingValue={0}
       />
 
-{  /*    <DualRange 
+      <DualRange 
         componentId={'rank'}
         rangeObj={filterState.filters__rank} 
-        updateRangeFilter={actions.updateDualRangeFilter}
+        updateRangeFilter={actions.updateRankFilter}
+        className={filterClass +" player-filters__rank"}
         min={0} 
         max={100}
         step={1}
         gap={10}
         unit={''}
-      /> */}
+      />
 
       <Button
         clickFunc={actions.resetFilters}
+        className={filterClass +" player-filters__reset"}
         text={'Reset All Filters'}
-        class={'player-filters__reset'}
       />
 
     </div>
@@ -84,7 +91,8 @@ const mapDispatchToProps = dispatch => ({
       updateNameFilter, 
       updateClubFilter, 
       updatePositionFilter, 
-      updateDualRangeFilter,
+      updatePriceFilter,
+      updateRankFilter,
       resetFilters
     }, dispatch)
 })

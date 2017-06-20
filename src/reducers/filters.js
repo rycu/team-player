@@ -2,7 +2,8 @@ import {
 	UPDATE_NAME_FILTER, 
 	UPDATE_CLUB_FILTER, 
 	UPDATE_POSITION_FILTER,
-	UPDATE_DUAL_RANGE_FILTER,
+	UPDATE_PRICE_FILTER,
+	UPDATE_RANK_FILTER,
 	RESET_FILTERS
 } from '../constants/ActionTypes'
 
@@ -66,13 +67,17 @@ export default function filters(state = initialState, action) {
 			})
 
 
-		case UPDATE_DUAL_RANGE_FILTER:
-
-			var lowVal = action.lowVal;
-			var highVal = action.highVal;
+		case UPDATE_PRICE_FILTER:
 
 			return Object.assign({}, state, {
-				['filters__'+action.componentId]: {lowVal: lowVal, highVal: highVal} 
+				['filters__'+action.componentId]: {lowVal: action.lowVal, highVal: action.highVal} 
+			})
+
+
+		case UPDATE_RANK_FILTER:
+
+			return Object.assign({}, state, {
+				['filters__'+action.componentId]: {lowVal: action.lowVal, highVal: action.highVal} 
 			})
 
 

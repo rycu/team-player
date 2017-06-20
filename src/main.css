@@ -491,12 +491,32 @@ body {
   position: absolute;
   width: 1px; }
 
+.player-filters {
+  width: 100%; }
+
+.player-filters__name input {
+  width: 100%; }
+
+.player-filters__club select {
+  width: 100%; }
+
+.player-filters__position ul {
+  padding: 0;
+  margin: 0.2em 0; }
+
+.player-filters__position li {
+  display: inline-block;
+  width: 25%;
+  text-align: center; }
+
+.player-filters__reset button {
+  width: 100%; }
+
 .dual-range {
-  background-color: red;
+  background-color: gray;
   position: relative;
-  height: 3em;
-  margin: 5%;
-  width: 90%; }
+  height: 2em;
+  width: 100%; }
   .dual-range .dual-range__inputs {
     width: 100%;
     position: absolute;
@@ -512,9 +532,9 @@ body {
       z-index: 100;
       -webkit-appearance: none;
       border: none;
-      height: 2.99em;
+      height: 1.99em;
       width: 5%;
-      background: darkred;
+      background: darkgray;
       margin-top: 0.001em; }
     .dual-range .dual-range__inputs:focus {
       outline: none; }
@@ -525,7 +545,7 @@ body {
     position: absolute;
     width: 100%;
     text-align: center;
-    top: 30%;
+    top: 0.35em;
     color: black; }
   .dual-range .dual-range__out-of-range {
     position: absolute; }

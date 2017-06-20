@@ -13,10 +13,10 @@ export default class dualRange extends Component {
 		unit: PropTypes.string
 	}
 
+	//SET COMPONENT STATE FROM REDUX
 	state = {
 	    lowVal: this.props.rangeObj.lowVal,
-	    highVal: this.props.rangeObj.highVal,
-	    ephemeralChange: false
+	    highVal: this.props.rangeObj.highVal
 	}
 
 	//ENSURES CORRECT MINIMUM VALUE RANGE IS MAINTAINED 
@@ -52,6 +52,7 @@ export default class dualRange extends Component {
 			){
 			this.setState({
 					[id+'Val']: parseFloat(value),
+					//UPDATE SIBLING TO ENSURE COMPONENT STATE IS UPDATED AFTER EXTRENAL INFLUENCE
 					[siblingId+'Val']: parseFloat(siblingValue),
 					ephemeralChange: true
 			})
@@ -110,7 +111,7 @@ export default class dualRange extends Component {
 		}
 
 		return (
-			<div className={"dual-range player-filters__" + this.props.componentId}>
+			<div className={"dual-range " + this.props.className}>
 				
 				{/*SVG USED TO DISPLAY OUT OF RANGE AREAS*/}
 				<svg className="dual-range__out-of-range" width="100%" height="100%">

@@ -7,7 +7,7 @@ export const updateNameFilter = nameTxt => (
 		{ 
 			//ACTION TYPE (type: requied prop, nameTxt: val sting)
 			type: types.UPDATE_NAME_FILTER, 
-			nameTxt 
+			nameTxt
 		}
 )
 

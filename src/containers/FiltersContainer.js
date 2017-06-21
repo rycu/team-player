@@ -16,7 +16,7 @@ import {
   updatePriceFilter,
   updateRankFilter,
   resetFilters
-} from '../actions'
+} from '../actions/filterActions'
 
 let filterClass = 'player-filters';
 

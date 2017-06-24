@@ -59,9 +59,7 @@ export default function filters(state = initialState, action) {
 			}else{
 				newpositionArr.push(action.id);
 			}
-
-			console.log(action.id);
-
+			
 			return Object.assign({}, state, {
 				filters__position: newpositionArr
 			})

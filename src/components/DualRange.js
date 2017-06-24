@@ -19,6 +19,14 @@ export default class dualRange extends Component {
 	    highVal: this.props.rangeObj.highVal
 	}
 
+	componentWillReceiveProps(nextProps){
+		//GETS NEW STATE FROM PROPS IF UPDATED
+			this.setState({
+				lowVal: nextProps.rangeObj.lowVal,
+				highVal: nextProps.rangeObj.highVal
+			})
+	}
+
 	//ENSURES CORRECT MINIMUM VALUE RANGE IS MAINTAINED 
 	overlapCorrect(id){
 		let lowVal = this.state.lowVal;
@@ -40,10 +48,9 @@ export default class dualRange extends Component {
 	}
 
 	//UPDATES COMPONENT STATE 
-	updateState(id, value, siblingValue){
+	updateState(id, value){
 		let lowMax = this.props.max-this.props.gap;
 		let highMin = this.props.min+this.props.gap;
-		let siblingId = id === 'low' ? 'high' : 'low';
 
 		if(
 			//ONLY UPDATE THUMB WITHIN LIMITS
@@ -52,9 +59,6 @@ export default class dualRange extends Component {
 			){
 			this.setState({
 					[id+'Val']: parseFloat(value),
-					//UPDATE SIBLING TO ENSURE COMPONENT STATE IS UPDATED AFTER EXTRENAL INFLUENCE
-					[siblingId+'Val']: parseFloat(siblingValue),
-					ephemeralChange: true
 			})
 		}
 		this.overlapCorrect(id);
@@ -90,9 +94,6 @@ export default class dualRange extends Component {
 	    		this.valueRound(this.state.lowVal), 
 	    		this.valueRound(this.state.highVal)
 	    	);
-	    	this.setState({
-				ephemeralChange: false,
-			})
 		})
 		.catch((err) =>{
 			console.log(err);
@@ -103,12 +104,6 @@ export default class dualRange extends Component {
 
 		let lowVal = this.state.lowVal;
 		let highVal = this.state.highVal;
-
-		//GETS NEW STATE FROM REDUX IF CHANGE ISN'T EPHEMERAL
-		if(!this.state.ephemeralChange){
-			lowVal = this.props.rangeObj.lowVal;
-			highVal = this.props.rangeObj.highVal;
-		}
 
 		return (
 			<div className={"dual-range " + this.props.className}>
@@ -136,7 +131,6 @@ export default class dualRange extends Component {
 					max={this.props.max} 
 					step={this.props.step}
 					value={lowVal}
-					data-siblingvalue={highVal}
 					onChange={this.handleChange} 
 					onMouseUp={this.handleSubmit}
 					onKeyUp={this.handleSubmit}
@@ -150,7 +144,6 @@ export default class dualRange extends Component {
 					max={this.props.max} 
 					step={this.props.step} 
 					value={highVal}
-					data-siblingvalue={lowVal}
 					onChange={this.handleChange} 
 					onMouseUp={this.handleSubmit}
 					onKeyUp={this.handleSubmit}
@@ -166,5 +159,3 @@ export default class dualRange extends Component {
     	);
 	}
 }
-
-

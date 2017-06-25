@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 import filters from './filters'
-import playerList__reducers from './playerList__reducers'
+import apiData from './apiData'
 
 const rootReducer = combineReducers({
-  filters, playerList__reducers
+  filters, apiData
 })
 
 export default rootReducer

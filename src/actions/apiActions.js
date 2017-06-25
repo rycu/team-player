@@ -1,65 +1,53 @@
 import * as types from '../constants/ActionTypes'
-
 import fetch from 'isomorphic-fetch'
-//Be aware that any fetch polyfill assumes a Promise polyfill is already present. 
 
-
-export function selectPlayerList(playerList) {
+export function invalidateData() {
   return {
-    type: types.SELECT_PLAYER_LIST,
-    playerList
+    type: types.INVALIDATE_DATA
   }
 }
 
-export function invalidatePlayerList(playerList) {
+function requestPlayers() {
   return {
-    type: types.INVALIDATE_PLAYER_LIST,
-    playerList
+    type: types.REQUEST_PLAYERS
   }
 }
 
-function requestPlayers(playerList) {
-  return {
-    type: types.REQUEST_PLAYERS,
-    playerList
-  }
-}
-
-function receivePlayers(playerList, json) {
+function receivePlayers(json) {
+  
   return {
     type: types.RECEIVE_PLAYERS,
-    playerList,
-    posts: json.data.children.map(child => child.data),
+    players: json.map(child => child),
     receivedAt: Date.now()
   }
 }
 
-function fetchPlayers(playerList) {
+function fetchPlayers() {
   return dispatch => {
-    dispatch(requestPlayers(playerList))
-    return fetch(`https://www.reddit.com/r/${playerList}.json`)
+    dispatch(requestPlayers())
+    return fetch('./api_dummy/premElements.json')
       .then(response => response.json())
-      .then(json => dispatch(receivePlayers(playerList, json)))
+      .then(json => dispatch(receivePlayers(json)))
   }
 }
 
-function shouldFetchPlayers(state, playerList) {
-  const posts = state.playersByPlayerList[playerList]
-  if (!posts) {
+function shouldFetchPlayers(state) {
+  const players = state.apiData['playerList']
+  if (!players) {
     return true
-  } else if (posts.isFetching) {
+  } else if (players.isFetching) {
     return false
   } else {
-    return posts.didInvalidate
+    return players.didInvalidate
   }
 }
 
-export function fetchPlayersIfNeeded(playerList) {
-	return (dispatch, getState) => {
-		if (shouldFetchPlayers(getState(), playerList)) {
-			return dispatch(fetchPlayers(playerList))
-		} else {
-			return Promise.resolve()
-		}
-	}
+export function fetchPlayersIfNeeded() {
+  return (dispatch, getState) => {
+    if (shouldFetchPlayers(getState())) {
+      return dispatch(fetchPlayers())
+    } else {
+      return Promise.resolve()
+    }
+  }
 }

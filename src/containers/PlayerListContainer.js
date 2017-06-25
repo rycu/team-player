@@ -1,27 +1,69 @@
-import React from 'react';
-//import PropTypes from 'prop-types'
-//import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import PlayerRowContainer from './PlayerRowContainer'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import {fetchPlayersIfNeeded, invalidateData } from '../actions/apiActions'
+import Players from '../components/Players'
 
-//LATER SET TO ONLY CALL FILTERS
-// import { 
-//   temp
-// } from '../actions/apiActions'
+class apiContainer extends Component {
+  static propTypes = {
+    players: PropTypes.array.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    lastUpdated: PropTypes.number,
+    dispatch: PropTypes.func.isRequired
+  }
 
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(fetchPlayersIfNeeded())
+  }
 
-const PlayerListContainer = ({playerListState, actions}) => (
-    <div>
-      <p>API DUMP GOES HERE</p>
-      <PlayerRowContainer />
-    </div>
-)
+  handleRefreshClick = e => {
+    e.preventDefault()
 
-// PlayerListContainer.propTypes = {
+    const { dispatch } = this.props
+    dispatch(invalidateData())
+    dispatch(fetchPlayersIfNeeded())
+  }
 
-// }
+  render() {
+    const {players, isFetching} = this.props
+    const isEmpty = players.length === 0
 
+    return (
+      <div>
+        <p>
+          {!isFetching &&
+            <button onClick={this.handleRefreshClick}>
+              Refresh
+            </button>
+          }
+        </p>
+        {isEmpty
+          ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
+          : <div style={{ opacity: isFetching ? 0.2 : 1 }}>
+              <Players players={players} />
+            </div>
+        }
+      </div>
+    )
+  }
+}
 
-export default connect()(PlayerListContainer)
+const mapStateToProps = state => {
+  const { apiData } = state
+  const {
+    isFetching,
+    items: players
+  } = apiData['playerList'] || {
+    isFetching: true,
+    items: []
+  }
 
+  return {
+    players,
+    isFetching
+  }
+}
+
+export default connect(mapStateToProps)(apiContainer)
 

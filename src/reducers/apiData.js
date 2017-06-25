@@ -1,19 +1,8 @@
-import { combineReducers } from 'redux'
 import {
-  SELECT_PLAYER_LIST,
-  INVALIDATE_PLAYER_LIST,
+  INVALIDATE_DATA,
   REQUEST_PLAYERS,
   RECEIVE_PLAYERS
 } from '../constants/ActionTypes'
-
-function selectedPlayerList(state = 'reactjs', action) {
-  switch (action.type) {
-    case SELECT_PLAYER_LIST:
-      return action.playerList
-    default:
-      return state
-  }
-}
 
 function players(
   state = {
@@ -24,7 +13,7 @@ function players(
   action
 ) {
   switch (action.type) {
-    case INVALIDATE_PLAYER_LIST:
+    case INVALIDATE_DATA:
       return Object.assign({}, state, {
         didInvalidate: true
       })
@@ -45,26 +34,20 @@ function players(
   }
 }
 
-function playersByPlayerList(state = {}, action) {
+function apiData(state = {}, action) {
   switch (action.type) {
-    case INVALIDATE_PLAYER_LIST:
+    case INVALIDATE_DATA:
     case RECEIVE_PLAYERS:
     case REQUEST_PLAYERS:
       return Object.assign({}, state, {
-        [action.playerList]: players(state[action.playerList], action)
+        playerList: players(state["playerList"], action)
       })
     default:
       return state
   }
 }
 
-const rootReducer = combineReducers({
-  playersByPlayerList,
-  selectedPlayerList
-})
 
-export default rootReducer
+export default apiData
 
-//The real world example goes even further, 
-//showing how to create a reducer factory for parameterized pagination reducers.
-//
+//The real world example goes even further, showing how to create a reducer factory for parameterized pagination reducers.

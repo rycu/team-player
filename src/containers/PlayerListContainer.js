@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {fetchPlayersIfNeeded, invalidateData } from '../actions/apiActions'
-import Players from '../components/Players'
+import PlayerRowContainer from './PlayerRowContainer'
 
 class apiContainer extends Component {
   static propTypes = {
@@ -41,7 +41,7 @@ class apiContainer extends Component {
         {isEmpty
           ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
           : <div style={{ opacity: isFetching ? 0.2 : 1 }}>
-              <Players players={players} />
+              <PlayerRowContainer players={players} />
             </div>
         }
       </div>

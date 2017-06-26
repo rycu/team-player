@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import filters from './filters'
-import apiData from './apiData'
+import filters from './filtersReducer'
+import apiData from './apiDataReducer'
 
 const rootReducer = combineReducers({
   filters, apiData

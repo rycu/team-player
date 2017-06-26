@@ -1,5 +1,5 @@
 import React from 'react';
-//import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 //import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -8,15 +8,16 @@ import { connect } from 'react-redux';
 //   temp
 // } from '../actions'
 
-const PlayerRowContainer = ({playerListState, actions}) => (
-    <div>
-      <p>API ROWS MAPPED TO HERE</p>
-    </div>
+const PlayerRowContainer = ({players, actions}) => (
+	<ul>
+		{players.map((player, i) =>
+			<li key={i}>{player.first_name}  {player.second_name} {player.team} {player.element_type} {player.now_cost} {player.creativity} {}</li>
+		)}
+	</ul>
 )
 
-// PlayerRowContainer.propTypes = {
-
-// }
-
+PlayerRowContainer.propTypes = {
+  players: PropTypes.array.isRequired
+}
 
 export default connect()(PlayerRowContainer)

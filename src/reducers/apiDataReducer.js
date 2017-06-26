@@ -34,7 +34,7 @@ function players(
   }
 }
 
-function apiData(state = {}, action) {
+export default function apiData(state = {}, action) {
   switch (action.type) {
     case INVALIDATE_DATA:
     case RECEIVE_PLAYERS:
@@ -46,8 +46,5 @@ function apiData(state = {}, action) {
       return state
   }
 }
-
-
-export default apiData
 
 //The real world example goes even further, showing how to create a reducer factory for parameterized pagination reducers.

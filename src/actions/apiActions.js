@@ -1,38 +1,41 @@
 import * as types from '../constants/ActionTypes'
 import fetch from 'isomorphic-fetch'
 
-export function invalidateData() {
+export function invalidateData(dataName) {
   return {
-    type: types.INVALIDATE_DATA
+    type: types.INVALIDATE_DATA,
+    dataName
   }
 }
 
-function requestPlayers() {
+function requestData(dataName) {
   return {
-    type: types.REQUEST_PLAYERS
+    type: types.REQUEST_DATA,
+    dataName
   }
 }
 
-function receivePlayers(json) {
+function receiveData(json, dataName) {
   
   return {
-    type: types.RECEIVE_PLAYERS,
+    type: types.RECEIVE_DATA,
+    dataName,
     players: json.map(child => child),
     receivedAt: Date.now()
   }
 }
 
-function fetchPlayers() {
+function fetchData(dataName, dataSlug) {
   return dispatch => {
-    dispatch(requestPlayers())
-    return fetch('./api_dummy/premElements.json')
+    dispatch(requestData(dataName))
+    return fetch(`./api_dummy/${dataSlug}.json`)
       .then(response => response.json())
-      .then(json => dispatch(receivePlayers(json)))
+      .then(json => dispatch(receiveData(json, dataName)))
   }
 }
 
-function shouldFetchPlayers(state) {
-  const players = state.apiData['playerList']
+function shouldFetchData(dataName, state) {
+  const players = state.apiData[dataName]
   if (!players) {
     return true
   } else if (players.isFetching) {
@@ -42,10 +45,10 @@ function shouldFetchPlayers(state) {
   }
 }
 
-export function fetchPlayersIfNeeded() {
+export function fetchDataIfNeeded(dataName, dataSlug) {
   return (dispatch, getState) => {
-    if (shouldFetchPlayers(getState())) {
-      return dispatch(fetchPlayers())
+    if (shouldFetchData(dataName, getState())) {
+      return dispatch(fetchData(dataName, dataSlug))
     } else {
       return Promise.resolve()
     }

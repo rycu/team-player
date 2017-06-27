@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import {fetchPlayersIfNeeded, invalidateData } from '../actions/apiActions'
+import {fetchDataIfNeeded, invalidateData } from '../actions/apiActions'
 import PlayerRowContainer from './PlayerRowContainer'
 
 class apiContainer extends Component {
@@ -14,15 +14,15 @@ class apiContainer extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(fetchPlayersIfNeeded())
+    dispatch(fetchDataIfNeeded('playerList', 'premElements'))
   }
 
   handleRefreshClick = e => {
     e.preventDefault()
 
     const { dispatch } = this.props
-    dispatch(invalidateData())
-    dispatch(fetchPlayersIfNeeded())
+    dispatch(invalidateData('playerList'))
+    dispatch(fetchDataIfNeeded('playerList', 'premElements'))
   }
 
   render() {

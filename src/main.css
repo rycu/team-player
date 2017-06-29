@@ -512,6 +512,17 @@ body {
 .player-filters__reset button {
   width: 100%; }
 
+.player-list {
+  width: 100%; }
+
+.player-list__row {
+  width: 100%; }
+  .player-list__row div {
+    display: inline-block;
+    padding: 2%; }
+  .player-list__row input {
+    width: 100%; }
+
 .dual-range {
   background-color: gray;
   position: relative;

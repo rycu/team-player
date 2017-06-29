@@ -11,7 +11,13 @@ import { connect } from 'react-redux';
 const PlayerRowContainer = ({players, actions}) => (
 	<ul>
 		{players.map((player, i) =>
-			<li key={i}>{player.first_name}  {player.second_name} {player.team} {player.element_type} {player.now_cost} {player.creativity} {}</li>
+		<li className="player-list__row" key={i}>
+			<div>{player.first_name} {player.second_name}</div>
+			<div>{player.team}</div>
+			<div>{player.element_type}</div>
+			<div>{player.now_cost}</div>
+			<div>{player.creativity}</div>
+		</li>
 		)}
 	</ul>
 )

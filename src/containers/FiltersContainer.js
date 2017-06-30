@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FilterByName from '../components/FilterByName';
+import FilterByClubContainer from './FilterByClubContainer';
 import FilterByClub from '../components/FilterByClub';
 import FilterByPosition from '../components/FilterByPosition';
 import Button from '../components/Button';
@@ -30,7 +31,8 @@ const FiltersContainer = ({filterState, actions}) => (
         className={filterClass +" player-filters__name"}
       />
 
-      <FilterByClub 
+
+      <FilterByClubContainer 
         clubId={filterState.filters__club} 
         updateClubFilter={actions.updateClubFilter}
         className={filterClass +" player-filters__club"}

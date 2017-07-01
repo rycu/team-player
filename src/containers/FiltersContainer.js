@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FilterByName from '../components/FilterByName';
 import FilterByClubContainer from './FilterByClubContainer';
-import FilterByPosition from '../components/FilterByPosition';
+import FilterByPositionContainer from './FilterByPositionContainer';
 import Button from '../components/Button';
 import DualRange from '../components/DualRange';
 
@@ -37,7 +37,7 @@ const FiltersContainer = ({filterState, actions}) => (
         className={filterClass +" player-filters__club"}
       />
 
-      <FilterByPosition 
+      <FilterByPositionContainer
         positionArr={filterState.filters__position} 
         updatePositionFilter={actions.updatePositionFilter}
         className={filterClass +" player-filters__position"}

@@ -30,7 +30,10 @@ export default class FilterByClub extends Component {
 
 	buildPosBoxes(){
 
-		var positions = ['Striker','Midfielder','Defender','Goalkeeper'];
+		var positions = [];
+		this.props.positions.map((position) =>
+			positions.push(position.plural_name_short)
+		)
 		var rows = [];
 		var self = this;
 
@@ -47,7 +50,6 @@ export default class FilterByClub extends Component {
 	}
 
 	render() {
-
 		return (
 			<div className={this.props.className}>
 				{this.buildPosBoxes()}

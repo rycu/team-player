@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {fetchDataIfNeeded} from '../actions/apiActions'
-import FilterByClub from '../components/FilterByClub'
+import FilterByPosition from '../components/FilterByPosition'
 
-class FilterByClubContainer extends Component {
+class FilterByPositionContainer extends Component {
   static propTypes = {
-    clubs: PropTypes.array.isRequired,
+    positions: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
     dispatch: PropTypes.func.isRequired
@@ -14,18 +14,18 @@ class FilterByClubContainer extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(fetchDataIfNeeded('clubList', 'premTeams'))
+    dispatch(fetchDataIfNeeded('positionList', 'premElement_types'))
   }
 
   render() {
-    const {clubs, isFetching, clubId, updateClubFilter, className} = this.props
+    const {positions, isFetching, positionArr, updatePositionFilter, className} = this.props
 
     return (
       <div style={{ opacity: isFetching ? 0.2 : 1 }}>
-        <FilterByClub 
-          clubs={clubs} 
-          clubId={clubId} 
-          updateClubFilter={updateClubFilter}
+        <FilterByPosition 
+          positions={positions}
+          positionArr={positionArr} 
+          updatePositionFilter={updatePositionFilter}
           className={className}
         />
       </div>
@@ -37,17 +37,17 @@ const mapStateToProps = state => {
   const { apiData } = state
   const {
     isFetching,
-    items: clubs
-  } = apiData['clubList'] || {
+    items: positions
+  } = apiData['positionList'] || {
     isFetching: true,
     items: []
   }
 
   return {
-    clubs,
+    positions,
     isFetching
   }
 }
 
-export default connect(mapStateToProps)(FilterByClubContainer)
+export default connect(mapStateToProps)(FilterByPositionContainer)
 

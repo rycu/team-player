@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FilterByName from '../components/FilterByName';
 import FilterByClubContainer from './FilterByClubContainer';
-import FilterByClub from '../components/FilterByClub';
 import FilterByPosition from '../components/FilterByPosition';
 import Button from '../components/Button';
 import DualRange from '../components/DualRange';

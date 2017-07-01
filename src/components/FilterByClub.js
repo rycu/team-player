@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 export default class FilterByClub extends Component {
 	static propTypes = {
 		updateClubFilter: PropTypes.func.isRequired,
-		clubId: PropTypes.number
+		clubId: PropTypes.number,
+		clubs: PropTypes.array.isRequired
 	};
 
 	handleChange = e => {
@@ -13,20 +14,20 @@ export default class FilterByClub extends Component {
 	}
 
 	render() {
-		let clubId = this.props.clubId;
+		let {clubId, clubs} = this.props;
+
 		return (
 			<div className={this.props.className}>
 				<select 
 					value={clubId}
 					onChange={this.handleChange}
 				>
-					<option value='0'>select a club</option>
-					<option value='1'>club a</option>
-					<option value='2'>club b</option>
+					<option value='' key="0">All Premier League Clubs</option>
+					{clubs.map((club) =>
+						<option value={club.id} key={club.id}>{club.name}</option>
+					)}
 				</select>
 			</div>
     	);
 	}
 }
-
-

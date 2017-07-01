@@ -14,19 +14,22 @@ class FilterByClubContainer extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(fetchDataIfNeeded('clubList', 'premElements'))
+    dispatch(fetchDataIfNeeded('clubList', 'premTeams'))
     //TEAM FEED NOT WORKING AND clubs is undefined 
+    //
+    
   }
 
   render() {
-    const {clubs, isFetching} = this.props
+    const {clubs, isFetching, clubId, updateClubFilter, className} = this.props
+
     return (
       <div style={{ opacity: isFetching ? 0.2 : 1 }}>
         <FilterByClub 
           clubs={clubs} 
-          clubId={this.props.clubId} 
-          updateClubFilter={this.props.updateClubFilter}
-          className={this.props.className}
+          clubId={clubId} 
+          updateClubFilter={updateClubFilter}
+          className={className}
         />
       </div>
     )
@@ -37,14 +40,14 @@ const mapStateToProps = state => {
   const { apiData } = state
   const {
     isFetching,
-    items: players
+    items: clubs
   } = apiData['clubList'] || {
     isFetching: true,
     items: []
   }
 
   return {
-    players,
+    clubs,
     isFetching
   }
 }

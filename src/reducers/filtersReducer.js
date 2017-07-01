@@ -10,7 +10,7 @@ import {
 const initialState = 
   {
     filters__name: '',
-    filters__club: 0,
+    filters__club: '0',
     filters__position: ['Striker','Midfielder','Defender','Goalkeeper'],
     filters__price: {lowVal: 2, highVal: 15},
     filters__rank: {lowVal: 5, highVal: 70} 

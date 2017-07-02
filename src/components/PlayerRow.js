@@ -1,14 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-//import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 
-//LATER SET TO ONLY CALL FILTERS
-// import {
-//   temp
-// } from '../actions'
-
-const PlayerRowContainer = ({players, actions}) => (
+const PlayerRow = ({players, actions}) => (
 	<ul>
 		{players.map((player, i) =>
 		<li className="player-list__row" key={i}>
@@ -22,8 +15,8 @@ const PlayerRowContainer = ({players, actions}) => (
 	</ul>
 )
 
-PlayerRowContainer.propTypes = {
+PlayerRow.propTypes = {
   players: PropTypes.array.isRequired
 }
 
-export default connect()(PlayerRowContainer)
+export default PlayerRow

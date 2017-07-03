@@ -39,7 +39,7 @@ export default function apiData(state = {}, action) {
     case INVALIDATE_DATA:
     case RECEIVE_DATA:
     case REQUEST_DATA:
-      console.log(action);
+      //console.log(action);
       return Object.assign({}, state, {
         [action.dataName]: players(state[action.dataName], action)
       })

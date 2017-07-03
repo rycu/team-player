@@ -523,6 +523,9 @@ body {
   .player-list__row input {
     width: 100%; }
 
+.player-list__row--hidden {
+  display: none; }
+
 .dual-range {
   background-color: gray;
   position: relative;

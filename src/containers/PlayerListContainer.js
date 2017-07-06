@@ -26,7 +26,7 @@ class apiContainer extends Component {
   }
 
   render() {
-    const {players, isFetching} = this.props
+    const {players, isFetching, filters} = this.props
     const isEmpty = players.length === 0
 
     return (
@@ -41,7 +41,7 @@ class apiContainer extends Component {
         {isEmpty
           ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
           : <div className="player-list" style={{ opacity: isFetching ? 0.2 : 1 }}>
-              <PlayerRow players={players} />
+              <PlayerRow players={players} filters={filters}/>
             </div>
         }
       </div>
@@ -50,7 +50,7 @@ class apiContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  const { apiData } = state
+  const { apiData, filters } = state
   const {
     isFetching,
     items: players
@@ -61,7 +61,8 @@ const mapStateToProps = state => {
 
   return {
     players,
-    isFetching
+    isFetching,
+    filters
   }
 }
 

@@ -9,19 +9,30 @@ export default class PlayerRow extends Component {
 
 	displayRow(player){
 
-		if(player.first_name === 'David'){
-			return '';
-		}else{
+
+
+		const { //filters__name, 
+				filters__club, 
+				//filters__position, 
+				//filters__price, 
+				//filters__rank 
+			} = this.props.filters
+
+		//console.log(this.props.apiData.positionList.items[filters__position].plural_name_short);
+
+		if(player.team !== filters__club && filters__club !== 0){
 			return ' player-list__row--hidden';
 		}
 
-		
+		// if(filters__position.includes(player.element_type)){
+		// 	return ' player-list__row--hidden';
+		// }
+
+		return '';
+
 	}
 
 	render() {
-
-		console.log(this.props);
-
 		return(
 			<ul>
 				{this.props.players.map((player, i) =>
@@ -37,23 +48,3 @@ export default class PlayerRow extends Component {
 		)
 	}
 }
-
-// const PlayerRow = ({players, actions}) => (
-// 	<ul>
-// 		{players.map((player, i) =>
-// 		<li className="player-list__row" key={i}>
-// 			<div>{player.first_name} {player.second_name}</div>
-// 			<div>{player.team}</div>
-// 			<div>{player.element_type}</div>
-// 			<div>{player.now_cost}</div>
-// 			<div>{player.creativity}</div>
-// 		</li>
-// 		)}
-// 	</ul>
-// )
-
-// PlayerRow.propTypes = {
-//   players: PropTypes.array.isRequired
-// }
-
-// export default PlayerRow

@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FilterByName from '../components/FilterByName';
-import FilterByClubContainer from './FilterByClubContainer';
-import FilterByPositionContainer from './FilterByPositionContainer';
+//import FilterByClubContainer from './FilterByClubContainer';
+//import FilterByPositionContainer from './FilterByPositionContainer';
+import FilterByClub from '../components/FilterByClub';
+import FilterByPosition from '../components/FilterByPosition';
 import Button from '../components/Button';
 import DualRange from '../components/DualRange';
 
@@ -20,7 +22,7 @@ import {
 
 let filterClass = 'player-filters';
 
-const FiltersContainer = ({filterState, actions}) => (
+const FiltersContainer = ({filterState, clubs, positions, actions}) => (
     <div>
 
     	<FilterByName 
@@ -31,13 +33,21 @@ const FiltersContainer = ({filterState, actions}) => (
       />
 
 
-      <FilterByClubContainer 
+      <FilterByClub
+        clubs={clubs}
         clubId={filterState.filters__club} 
         updateClubFilter={actions.updateClubFilter}
         className={filterClass +" player-filters__club"}
       />
 
-      <FilterByPositionContainer
+{/*      <FilterByPositionContainer
+        positionArr={filterState.filters__position} 
+        updatePositionFilter={actions.updatePositionFilter}
+        className={filterClass +" player-filters__position"}
+      />*/}
+
+      <FilterByPosition
+        positions={positions}
         positionArr={filterState.filters__position} 
         updatePositionFilter={actions.updatePositionFilter}
         className={filterClass +" player-filters__position"}
@@ -79,6 +89,8 @@ const FiltersContainer = ({filterState, actions}) => (
 
 FiltersContainer.propTypes = {
   filterState: PropTypes.object.isRequired,
+  positions: PropTypes.array.isRequired,
+  clubs: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
 

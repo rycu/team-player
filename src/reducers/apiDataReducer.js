@@ -47,5 +47,3 @@ export default function apiData(state = {}, action) {
       return state
   }
 }
-
-//The real world example goes even further, showing how to create a reducer factory for parameterized pagination reducers.

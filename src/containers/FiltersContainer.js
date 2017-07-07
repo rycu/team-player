@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FilterByName from '../components/FilterByName';
-//import FilterByClubContainer from './FilterByClubContainer';
-//import FilterByPositionContainer from './FilterByPositionContainer';
 import FilterByClub from '../components/FilterByClub';
 import FilterByPosition from '../components/FilterByPosition';
 import Button from '../components/Button';
@@ -32,19 +30,12 @@ const FiltersContainer = ({filterState, clubs, positions, actions}) => (
         className={filterClass +" player-filters__name"}
       />
 
-
       <FilterByClub
         clubs={clubs}
         clubId={filterState.filters__club} 
         updateClubFilter={actions.updateClubFilter}
         className={filterClass +" player-filters__club"}
       />
-
-{/*      <FilterByPositionContainer
-        positionArr={filterState.filters__position} 
-        updatePositionFilter={actions.updatePositionFilter}
-        className={filterClass +" player-filters__position"}
-      />*/}
 
       <FilterByPosition
         positions={positions}
@@ -59,9 +50,9 @@ const FiltersContainer = ({filterState, clubs, positions, actions}) => (
         updateRangeFilter={actions.updatePriceFilter}
         className={filterClass +" player-filters__price"}
         min={0} 
-        max={20}
+        max={150}
         step={0.1}
-        gap={2}
+        gap={10}
         unit={'M'}
         siblingValue={0}
       />
@@ -72,9 +63,9 @@ const FiltersContainer = ({filterState, clubs, positions, actions}) => (
         updateRangeFilter={actions.updateRankFilter}
         className={filterClass +" player-filters__rank"}
         min={0} 
-        max={100}
-        step={1}
-        gap={10}
+        max={10}
+        step={0.1}
+        gap={0.1}
         unit={''}
       />
 

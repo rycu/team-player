@@ -9,7 +9,7 @@ export default class FilterByClub extends Component {
 	};
 
 	handleChange = e => {
-		this.props.updatePositionFilter(e.target.checked, e.target.id);		
+		this.props.updatePositionFilter(e.target.checked, Number(e.target.id));		
 	}
 
 	renderCheckbox(thisVal){
@@ -22,7 +22,7 @@ export default class FilterByClub extends Component {
 
 		return(
 			<li key={thisVal}>
-				<label htmlFor={thisVal}>{thisVal}</label>
+				<label htmlFor={thisVal}>{this.props.positions[thisVal-1].plural_name_short}</label>
 				<input type="checkbox" checked={checked} onChange={this.handleChange} id={thisVal}/>
 			</li>
 		);
@@ -32,7 +32,7 @@ export default class FilterByClub extends Component {
 
 		var positions = [];
 		this.props.positions.map((position) =>
-			positions.push(position.plural_name_short)
+			positions.push(position.id)
 		)
 		var rows = [];
 		var self = this;

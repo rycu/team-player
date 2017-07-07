@@ -514,12 +514,16 @@ body {
 
 .player-list {
   width: 100%; }
+  .player-list ul {
+    padding: 0; }
 
 .player-list__row {
-  width: 100%; }
+  width: 100%;
+  list-style-type: none; }
   .player-list__row div {
     display: inline-block;
-    padding: 2%; }
+    padding: 1.5%;
+    font-size: 0.9em; }
   .player-list__row input {
     width: 100%; }
 

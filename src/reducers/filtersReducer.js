@@ -11,9 +11,9 @@ const initialState =
   {
     filters__name: '',
     filters__club: 0,
-    filters__position: ['GKP','DEF','MID','FWD'],
-    filters__price: {lowVal: 2, highVal: 15},
-    filters__rank: {lowVal: 5, highVal: 70} 
+    filters__position: [1, 2, 3, 4],
+    filters__price: {lowVal: 10, highVal: 140},
+    filters__rank: {lowVal: 0, highVal: 10} 
   };
 
 //ES6 default arguments syntax for state arg
@@ -52,7 +52,7 @@ export default function filters(state = initialState, action) {
 			var newpositionArr = state.filters__position.slice();
 
 			if(action.checked === false){
-				var i = newpositionArr.indexOf(action.id);
+				var  i= newpositionArr.indexOf(action.id);
 				if(i !== -1) {
 					newpositionArr.splice(i, 1);
 				}

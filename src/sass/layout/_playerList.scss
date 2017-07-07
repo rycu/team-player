@@ -1,20 +1,26 @@
 .player-list{
 	width: 100%;
+	
+	ul{
+		padding: 0;
+	}
 }
 
 
 .player-list__row{
 	width: 100%;
+	list-style-type: none;
 
 	div{
 		display: inline-block;
-		padding: 2%;
-		
+		padding: 1.5%;
+		font-size: 0.9em;
 	}
 
 	input{
 		width: 100%;
 	}
+
 }
 
 .player-list__row--hidden{

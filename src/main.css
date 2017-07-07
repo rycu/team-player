@@ -518,8 +518,10 @@ body {
     padding: 0; }
 
 .player-list__row {
+  margin: 0.2em 0;
   width: 100%;
-  list-style-type: none; }
+  list-style-type: none;
+  background-color: lightgray; }
   .player-list__row div {
     display: inline-block;
     padding: 1.5%;
@@ -527,8 +529,8 @@ body {
   .player-list__row input {
     width: 100%; }
 
-.player-list__row--hidden {
-  display: none; }
+.player-list__name-field {
+  width: 40%; }
 
 .dual-range {
   background-color: gray;

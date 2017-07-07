@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import Button from '../components/Button';
 
 export default class PlayerRow extends Component {
 	
@@ -55,8 +56,13 @@ export default class PlayerRow extends Component {
 					
 					return this.displayRow(player, rank) ?
 			 			<li className={"player-list__row"} key={i}>
+			 				<Button
+						    	//clickFunc={actions.resetFilters}
+						    	//className={filterClass +" player-filters__reset"}
+						    	text={'+'}
+						    />
 							<div>{'£'+(player.now_cost)+'m'}</div>
-							<div>{player.first_name} {player.second_name}</div>
+							<div className={"player-list__name-field"}>{player.first_name} {player.second_name}</div>
 							<div>{clubs[player.team-1].short_name}</div>
 							<div>{positions[player.element_type-1].plural_name_short}</div>	
 							<div>{rank}</div>

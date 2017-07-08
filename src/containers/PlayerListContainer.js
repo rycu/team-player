@@ -18,7 +18,7 @@ class apiContainer extends Component {
       <div>
         <p>    
           <button onClick={onClick()} style={{ opacity: isFetching ? 0.2 : 1 }}>
-            Refresh
+            Refresh Players!
           </button>
         </p>
         {isEmpty

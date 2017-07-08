@@ -134,6 +134,7 @@ export default class dualRange extends Component {
 					onChange={this.handleChange} 
 					onMouseUp={this.handleSubmit}
 					onKeyUp={this.handleSubmit}
+					onTouchEnd={this.handleSubmit}
 				/>
 
 				{/*HIGHER RANGE SLIDER*/}
@@ -147,6 +148,8 @@ export default class dualRange extends Component {
 					onChange={this.handleChange} 
 					onMouseUp={this.handleSubmit}
 					onKeyUp={this.handleSubmit}
+					onTouchEnd={this.handleSubmit}
+
 				/>
 
 				{/*OUTPUT LABEL*/}

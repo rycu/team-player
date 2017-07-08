@@ -535,7 +535,7 @@ body {
 .dual-range {
   background-color: gray;
   position: relative;
-  height: 2em;
+  height: 2.5em;
   width: 100%; }
   .dual-range .dual-range__inputs {
     width: 100%;
@@ -552,8 +552,8 @@ body {
       z-index: 100;
       -webkit-appearance: none;
       border: none;
-      height: 1.99em;
-      width: 5%;
+      height: 2.49em;
+      width: 2.6em;
       background: darkgray;
       margin-top: 0.001em; }
     .dual-range .dual-range__inputs:focus {
@@ -565,7 +565,7 @@ body {
     position: absolute;
     width: 100%;
     text-align: center;
-    top: 0.35em;
+    top: 0.55em;
     color: black; }
   .dual-range .dual-range__out-of-range {
     position: absolute; }

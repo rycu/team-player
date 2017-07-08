@@ -7,20 +7,15 @@ class apiContainer extends Component {
   static propTypes = {
     players: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired
+    //onClick: PropTypes.func.isRequired
   }
 
   render() {
-    const {players, isFetching, onClick, clubs, positions, filters} = this.props
+    const {players, isFetching, clubs, positions, filters} = this.props
     const isEmpty = players.length === 0
 
     return (
       <div>
-        <p>    
-          <button onClick={onClick()} style={{ opacity: isFetching ? 0.2 : 1 }}>
-            Refresh Players!
-          </button>
-        </p>
         {isEmpty
           ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
           : <div className="player-list" style={{ opacity: isFetching ? 0.2 : 1 }}>

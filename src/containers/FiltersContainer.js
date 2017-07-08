@@ -20,7 +20,7 @@ import {
 
 let filterClass = 'player-filters';
 
-const FiltersContainer = ({filterState, clubs, positions, actions}) => (
+const FiltersContainer = ({filterState, clubs, positions, onClick, isFetching, actions}) => (
     <div>
 
     	<FilterByName 
@@ -69,11 +69,20 @@ const FiltersContainer = ({filterState, clubs, positions, actions}) => (
         unit={''}
       />
 
-      <Button
-        clickFunc={actions.resetFilters}
-        className={filterClass +" player-filters__reset"}
-        text={'Reset All Filters'}
-      />
+      <div>
+        <Button
+          clickFunc={actions.resetFilters}
+          className={filterClass +" player-filters__reset"}
+          text={'Reset All Filters'}
+        />
+
+        <Button
+          style={{ opacity: isFetching ? 0.2 : 1 }} //NOT WORKING
+          clickFunc={onClick()}
+          className={filterClass +" player-filters__refresh"}      
+          text={'Refresh Players'}
+        />
+      </div>
 
     </div>
 )

@@ -491,9 +491,6 @@ body {
   position: absolute;
   width: 1px; }
 
-.player-filters {
-  width: 100%; }
-
 .player-filters__name input {
   width: 100%; }
 
@@ -509,8 +506,17 @@ body {
   width: 25%;
   text-align: center; }
 
-.player-filters__reset button {
-  width: 100%; }
+.player-filters__reset {
+  display: inline-block;
+  width: 50%; }
+  .player-filters__reset button {
+    width: 100%; }
+
+.player-filters__refresh {
+  display: inline-block;
+  width: 50%; }
+  .player-filters__refresh button {
+    width: 100%; }
 
 .player-list {
   width: 100%; }

@@ -24,8 +24,7 @@ class App extends Component {
     dispatch(fetchDataIfNeeded('playerList', 'premElements'))
   }
 
-  handlePlayerRefreshClick = e => {
-    e.preventDefault()
+  handlePlayerRefreshClick = () => {
     const { dispatch } = this.props
     dispatch(invalidateData('playerList'))
     dispatch(fetchDataIfNeeded('playerList', 'premElements'))
@@ -38,10 +37,17 @@ class App extends Component {
 		<div>
 			<Header />
 			<div style={{ opacity: (isFetchingClub || isFetchingPosition) ? 0.2 : 1 }}>
-				<FiltersContainer positions={positions} clubs={clubs} />
+				<FiltersContainer 
+          positions={positions} 
+          clubs={clubs} 
+          onClick={() => this.handlePlayerRefreshClick} 
+          isFetching={isFetchingPlayers}
+        />
 			</div>
-			<PlayerListContainer players={players} isFetching={isFetchingPlayers} onClick={() => this.handlePlayerRefreshClick}/>
-
+  			<PlayerListContainer 
+          players={players} 
+          isFetching={isFetchingPlayers}
+        />
 		</div>
     )
   }

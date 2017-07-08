@@ -1,5 +1,5 @@
 .player-filters{
-	width: 100%;
+
 }
 
 
@@ -38,6 +38,16 @@
 }
 
 .player-filters__reset{
+	display: inline-block;
+	width: 50%;
+	button{
+		width: 100%;
+	}
+}
+
+.player-filters__refresh{
+	display: inline-block;
+	width: 50%;
 	button{
 		width: 100%;
 	}

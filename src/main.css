@@ -499,19 +499,12 @@ body {
   top: 4em;
   right: 0;
   bottom: 0;
-  left: 0; }
-
-.drafts {
-  position: absolute;
-  top: 4em;
-  right: 0;
-  bottom: 0;
   left: 0;
   display: flex; }
 
 .pitch {
-  width: 2em;
-  background-color: green; }
+  width: 0em;
+  background-color: lightgreen; }
 
 .player-selection {
   flex: 1;
@@ -564,6 +557,9 @@ body {
     font-size: 0.9em; }
   .player-list__row input {
     width: 100%; }
+
+.player-list__row--selected {
+  opacity: 0.7; }
 
 .player-list__name-field {
   width: 40%; }

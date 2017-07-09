@@ -5,6 +5,7 @@ import {fetchDataIfNeeded, invalidateData} from '../actions/apiActions'
 import Header from '../components/Header'
 import FiltersContainer from './FiltersContainer'
 import PlayerListContainer from './PlayerListContainer'
+import PitchContainer from './PitchContainer'
 
 class App extends Component {
   static propTypes = {
@@ -39,8 +40,7 @@ class App extends Component {
 			
       <div className="drafts">
 
-        <div className="pitch">
-        </div>
+        <PitchContainer />
 
         <div className="player-selection">
 

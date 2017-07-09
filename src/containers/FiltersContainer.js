@@ -77,10 +77,9 @@ const FiltersContainer = ({filterState, clubs, positions, onClick, isFetching, a
         />
 
         <Button
-          style={{ opacity: isFetching ? 0.2 : 1 }} //NOT WORKING
           clickFunc={onClick()}
           className={filterClass +" player-filters__refresh"}      
-          text={'Refresh Players'}
+          text={isFetching ? 'Loading...' : 'Refresh Players'}
         />
       </div>
 

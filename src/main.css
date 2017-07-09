@@ -491,6 +491,35 @@ body {
   position: absolute;
   width: 1px; }
 
+.header {
+  height: 4em; }
+
+.drafts {
+  position: absolute;
+  top: 4em;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+.drafts {
+  position: absolute;
+  top: 4em;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex; }
+
+.pitch {
+  width: 2em;
+  background-color: green; }
+
+.player-selection {
+  flex: 1;
+  display: flex;
+  flex-direction: column; }
+  .player-selection .player-list {
+    overflow: auto; }
+
 .player-filters__name input {
   width: 100%; }
 
@@ -521,7 +550,8 @@ body {
 .player-list {
   width: 100%; }
   .player-list ul {
-    padding: 0; }
+    padding: 0;
+    margin: 0; }
 
 .player-list__row {
   margin: 0.2em 0;

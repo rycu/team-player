@@ -36,18 +36,35 @@ class App extends Component {
     return (
 		<div>
 			<Header />
-			<div style={{ opacity: (isFetchingClub || isFetchingPosition) ? 0.2 : 1 }}>
-				<FiltersContainer 
-          positions={positions} 
-          clubs={clubs} 
-          onClick={() => this.handlePlayerRefreshClick} 
-          isFetching={isFetchingPlayers}
-        />
-			</div>
-  			<PlayerListContainer 
-          players={players} 
-          isFetching={isFetchingPlayers}
-        />
+			
+      <div className="drafts">
+
+        <div className="pitch">
+        </div>
+
+        <div className="player-selection">
+
+          <div className="player-filters" style={{ opacity: (isFetchingClub || isFetchingPosition) ? 0.2 : 1 }}>
+            <FiltersContainer 
+              positions={positions} 
+              clubs={clubs} 
+              onClick={() => this.handlePlayerRefreshClick} 
+              isFetching={isFetchingPlayers}
+            />
+          </div>
+          <div className="player-list" style={{ opacity: isFetchingPlayers ? 0.2 : 1 }}>
+            <PlayerListContainer 
+              players={players} 
+              isFetching={isFetchingPlayers}
+            />
+          </div>
+          <div>
+            STATS
+          </div>
+
+        </div>
+
+      </div>
 		</div>
     )
   }

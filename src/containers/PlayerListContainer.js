@@ -18,7 +18,7 @@ class apiContainer extends Component {
       <div>
         {isEmpty
           ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
-          : <div className="player-list" style={{ opacity: isFetching ? 0.2 : 1 }}>
+          : <div>
               <PlayerRow players={players} filters={filters} positions={positions} clubs={clubs}/>
             </div>
         }

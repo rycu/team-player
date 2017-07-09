@@ -1,3 +1,13 @@
-// -----------------------------------------------------------------------------
-// This file contains all styles related to the header of the site/application.
-// -----------------------------------------------------------------------------
+.header{
+
+	height: 4em;
+}
+
+.drafts{
+
+	position: absolute;
+	top: 4em;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}

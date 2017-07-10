@@ -6,14 +6,8 @@ export const updateTeamName = nameTxt => ({
 		nameTxt	
 })
 
-export const selectPlayer = id => ({
+export const togglePlayerSelect = id => ({
 
-		type: types.SELECT_PLAYER, 
+		type: types.TOGGLE_PLAYER_SELECT, 
 		id
-})
-
-export const removePlayer = playerId => ({
-
-		type: types.REMOVE_PLAYER, 
-		playerId
 })

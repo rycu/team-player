@@ -1,7 +1,6 @@
 import { 
 	UPDATE_TEAM_NAME,
-	SELECT_PLAYER, 
-	REMOVE_PLAYER
+	TOGGLE_PLAYER_SELECT
 } from '../constants/ActionTypes'
 
 const initialState = 
@@ -22,29 +21,23 @@ export default function selection(state = initialState, action) {
 				selection__name: action.nameTxt
 			})
 
-		case SELECT_PLAYER:
+		case TOGGLE_PLAYER_SELECT:
 
-			var newplayersArr1 = state.selection__players.slice();
-			
-			newplayersArr1.push(action.id);
-			
-			return Object.assign({}, state, {
-				selection__players: newplayersArr1
-			})
+			var newplayersArr = state.selection__players.slice();
 
-
-		case REMOVE_PLAYER:
-
-			var newplayersArr2 = state.selection__players.slice();
-
-			var  i= newplayersArr2.indexOf(action.id);
-			if(i !== -1) {
-				newplayersArr2.splice(i, 1);
+			if(newplayersArr.includes(action.id) === true){
+				var  i= newplayersArr.indexOf(action.id);
+				if(i !== -1) {
+					newplayersArr.splice(i, 1);
+				}
+			}else{
+				newplayersArr.push(action.id);
 			}
 			
 			return Object.assign({}, state, {
-				selection__players: newplayersArr2
+				selection__players: newplayersArr
 			})
+
 
 		default:
       		return state

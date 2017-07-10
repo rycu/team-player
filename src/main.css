@@ -547,6 +547,7 @@ body {
     margin: 0; }
 
 .player-list__row {
+  position: relative;
   margin: 0.2em 0;
   width: 100%;
   list-style-type: none;
@@ -557,9 +558,19 @@ body {
     font-size: 0.9em; }
   .player-list__row input {
     width: 100%; }
+  .player-list__row button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 3em; }
+    .player-list__row button::before {
+      content: '+'; }
 
 .player-list__row--selected {
   opacity: 0.7; }
+  .player-list__row--selected button::before {
+    content: '-'; }
 
 .player-list__name-field {
   width: 40%; }

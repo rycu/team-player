@@ -11,9 +11,9 @@ class pitchContainer extends Component {
 
 
   render() {
-    const {filters} = this.props
+    //const {filters} = this.props
 
-    console.log(filters);
+    //console.log(filters);
 
     return (
       <div className="pitch">

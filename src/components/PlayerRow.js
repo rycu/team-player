@@ -6,7 +6,8 @@ export default class PlayerRow extends Component {
 	
 	static propTypes = {
 		players: PropTypes.array.isRequired,
-		selectPlayer: PropTypes.func.isRequired
+		togglePlayerSelect: PropTypes.func.isRequired,
+		rowsPerRender: PropTypes.number.isRequired
 	}
 
 	displayRow(player, rank){
@@ -44,34 +45,33 @@ export default class PlayerRow extends Component {
 
 	}
 
-	playerSelected(playerId){
-
-		const { selection__players } = this.props.selection
-		console.log('BOOM'+playerId);
+	playerSelected(selection__players, playerId){
 		return 	selection__players.includes(playerId) ? true : false;
 	}
 
-
 	handleClick = (id) => {
-		this.props.selectPlayer(Number(id));
+		this.props.togglePlayerSelect(Number(id));
 	}
 
 	render() {
 
-		const {clubs, positions} = this.props;
+		const {players, rowsPerRender, clubs, positions} = this.props;
+		const { selection__players } = this.props.selection
+
 		return(
 			<ul>
-				{this.props.players.map((player) => {
+				{players.map((player, i) => {
 					// made up rank out of 10 (approx)
 					let rank =  Math.round(((Number(player.ict_index)+Number(player.now_cost*15))/225)*10)/10;
 					// made up form out of 10 (approx)
 					let form =  Math.round((player.ict_index/50)*10)/10;
 
-					return this.displayRow(player, rank) ?
 
-			 			<li className={"player-list__row"} 
+					return (this.displayRow(player, rank) && i <= rowsPerRender) ?
+
+			 			<li 
+			 				className={this.playerSelected(selection__players, player.id) ? "player-list__row player-list__row--selected" : "player-list__row"} 
 			 				key={player.id} 
-			 				style={{ opacity: this.playerSelected(player.id) ? 0.5 : 1 }}
 			 			>
 							
 							<div>{'£'+(player.now_cost)+'m'}</div>
@@ -82,8 +82,8 @@ export default class PlayerRow extends Component {
 							<div>{form}</div>
 							<Button
  						    	clickFunc={() => this.handleClick(player.id)}
- 						    	//className={}
- 						    	text={ this.playerSelected(player.id) ? '-' : '+' }
+ 						    	//className={filterClass +" player-filters__reset"}
+ 						    	text={''}
  						    />
 						
 						</li> 

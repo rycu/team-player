@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import PlayerRow from '../components/PlayerRow'
 
 import { 
-  selectPlayer
+  togglePlayerSelect
 } from '../actions/selectionActions'
 
 
@@ -13,11 +13,22 @@ import {
 class PlayerListContainer extends Component {
   static propTypes = {
     players: PropTypes.array.isRequired,
-    isFetching: PropTypes.bool.isRequired
+    isFetching: PropTypes.bool.isRequired,
+    rowsPerRender:  PropTypes.number.isRequired
   }
 
   render() {
-    const {players, isFetching, clubs, positions, filters, selection, actions} = this.props
+    const {
+      players, 
+      isFetching, 
+      rowsPerRender, 
+      clubs, 
+      positions, 
+      filters, 
+      selection, 
+      actions
+    } = this.props
+    
     const isEmpty = players.length === 0
 
     return (
@@ -30,8 +41,9 @@ class PlayerListContainer extends Component {
                 filters={filters} 
                 positions={positions} 
                 clubs={clubs} 
-                selectPlayer={actions.selectPlayer} 
+                togglePlayerSelect={actions.togglePlayerSelect} 
                 selection={selection}
+                rowsPerRender={rowsPerRender}
               />
             </div>
         }
@@ -63,7 +75,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators({ 
-      selectPlayer
+      togglePlayerSelect
     }, dispatch)
 })
 

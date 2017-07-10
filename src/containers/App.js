@@ -31,6 +31,22 @@ class App extends Component {
     dispatch(fetchDataIfNeeded('playerList', 'premElements'))
   }
 
+  rowsPerRender = 30
+
+  handleScroll = e => {
+
+    //INFINITE SCROLL
+
+    let boxHight = document.getElementById(e.target.id).clientHeight;
+    let offset = (Number(e.target.scrollHeight)-Number(boxHight));
+
+    if (e.target.scrollTop >= (offset-(offset/10))) {
+      this.rowsPerRender += 15;
+      this.forceUpdate();
+    }
+  }
+
+
   render() {
     const {clubs, isFetchingClub, positions, isFetchingPosition, players, isFetchingPlayers} = this.props
 
@@ -52,10 +68,15 @@ class App extends Component {
               isFetching={isFetchingPlayers}
             />
           </div>
-          <div className="player-list" style={{ opacity: isFetchingPlayers ? 0.2 : 1 }}>
+          <div 
+            id="scroll-box" 
+            onScroll={this.handleScroll} 
+            className="player-list" 
+            style={{ opacity: isFetchingPlayers ? 0.2 : 1 }}>
             <PlayerListContainer 
               players={players} 
               isFetching={isFetchingPlayers}
+              rowsPerRender={this.rowsPerRender}
             />
           </div>
           <div>

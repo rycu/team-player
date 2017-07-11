@@ -9,9 +9,9 @@ team-player is a fantasy football picker with a retro UX.
 
 ## Technologies
 
-- React(React Dom, React Redux)
-- Redux (Redux Logger,Redux Thunk)
-- Sass (Node Sass)
+- React	(react-dom, react-redux, react-transition-group)
+- Redux (redux-logger, redux-thunk)
+- Sass 	(node-sass)
 
 
 ## Features

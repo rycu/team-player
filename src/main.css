@@ -512,6 +512,8 @@ body {
   flex-direction: column; }
   .player-selection .player-list {
     overflow: auto; }
+  .player-selection .toggle-filter-view-button button {
+    width: 100%; }
 
 .player-filters__name input {
   width: 100%; }

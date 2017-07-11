@@ -6,6 +6,7 @@ import Header from '../components/Header'
 import FiltersContainer from './FiltersContainer'
 import PlayerListContainer from './PlayerListContainer'
 import PitchContainer from './PitchContainer'
+import Button from '../components/Button';
 
 class App extends Component {
   static propTypes = {
@@ -31,9 +32,13 @@ class App extends Component {
     dispatch(fetchDataIfNeeded('playerList', 'premElements'))
   }
 
+  handleFilterViewToggleClick = e => {
+    console.log('HIT');
+  }
+
   rowsPerRender = 30
 
-  handleScroll = e => {
+  handlePlayerListScroll = e => {
 
     //INFINITE SCROLL
 
@@ -68,9 +73,14 @@ class App extends Component {
               isFetching={isFetchingPlayers}
             />
           </div>
+          <Button
+            clickFunc={this.handleFilterViewToggleClick}
+            className={"toggle-filter-view-button"}
+            text={'toggle filter view'}
+          />
           <div 
             id="scroll-box" 
-            onScroll={this.handleScroll} 
+            onScroll={this.handlePlayerListScroll} 
             className="player-list" 
             style={{ opacity: isFetchingPlayers ? 0.2 : 1 }}>
             <PlayerListContainer 

@@ -2,6 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import Button from '../components/Button';
 
+
+
+const Row = ({playerId, fullName, cost, club, position, rank, form, selected , selectPlayer}) => (
+
+	<li 
+		className={selected ? "player-list__row player-list__row--selected" : "player-list__row"} 
+		key={playerId} 
+	>
+		<div>{'£'+(cost)+'m'}</div>
+		<div className={"player-list__name-field"}>{fullName}</div>
+		<div>{club}</div>
+		<div>{position}</div>	
+		<div>{rank}</div>
+		<div>{form}</div>
+		<Button
+			clickFunc={selectPlayer}
+			text={selected ? '-' : '+'}
+		/>
+	</li> 
+
+)
+
 export default class PlayerRow extends Component {
 	
 	static propTypes = {
@@ -54,10 +76,8 @@ export default class PlayerRow extends Component {
 	}
 
 	render() {
-
 		const {players, rowsPerRender, clubs, positions} = this.props;
 		const { selection__players } = this.props.selection
-
 		return(
 			<ul>
 				{players.map((player, i) => {
@@ -66,28 +86,18 @@ export default class PlayerRow extends Component {
 					// made up form out of 10 (approx)
 					let form =  Math.round((player.ict_index/50)*10)/10;
 
-
-					return (this.displayRow(player, rank) && i <= rowsPerRender) ?
-
-			 			<li 
-			 				className={this.playerSelected(selection__players, player.id) ? "player-list__row player-list__row--selected" : "player-list__row"} 
-			 				key={player.id} 
-			 			>
-							
-							<div>{'£'+(player.now_cost)+'m'}</div>
-							<div className={"player-list__name-field"}>{player.first_name} {player.second_name}</div>
-							<div>{clubs[player.team-1].short_name}</div>
-							<div>{positions[player.element_type-1].plural_name_short}</div>	
-							<div>{rank}</div>
-							<div>{form}</div>
-							<Button
- 						    	clickFunc={() => this.handleClick(player.id)}
- 						    	//className={filterClass +" player-filters__reset"}
- 						    	text={''}
- 						    />
-						
-						</li> 
-					: null
+					return (this.displayRow(player, rank) && i <= rowsPerRender) ? 
+						<Row 
+							playerId={player.id}
+							fullName={player.first_name + ' ' + player.second_name}
+							cost={player.now_cost}
+							club={clubs[player.team-1].short_name}
+							position={positions[player.element_type-1].plural_name_short}
+							rank={rank} 
+							form={form}
+							selected={this.playerSelected(selection__players, player.id)} 
+							selectPlayer = {() => this.handleClick(player.id)}
+						/> : null
 					}
 				)}
 			</ul>

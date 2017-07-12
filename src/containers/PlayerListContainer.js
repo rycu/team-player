@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import PlayerRow from '../components/PlayerRow'
+import PlayerRows from '../components/PlayerRows'
 
 import { 
   togglePlayerSelect
@@ -36,7 +36,7 @@ class PlayerListContainer extends Component {
         {isEmpty
           ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
           : <div>
-              <PlayerRow 
+              <PlayerRows 
                 players={players} 
                 filters={filters} 
                 positions={positions} 

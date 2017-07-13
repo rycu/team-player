@@ -9,7 +9,6 @@ import PitchContainer from './PitchContainer'
 import Button from '../components/Button'
 import Transition from 'react-transition-group/Transition'
 
-
 let filtersHeight = 0;
 
 class FilterSlide2 extends Component {
@@ -52,7 +51,6 @@ class FilterSlide2 extends Component {
 }
 
 
-
 class App extends Component {
   static propTypes = {
     positions: PropTypes.array.isRequired,
@@ -79,8 +77,6 @@ class App extends Component {
 
   handleFilterViewToggleClick = e => {
     this.setState({show: !this.state.show})
-    
-
   }
 
   rowsPerRender = 30
@@ -109,14 +105,7 @@ class App extends Component {
     return (
 		<div>
 
-
-
-      
-
 			<Header />
-
-
-
 
       <div className="drafts">
 
@@ -137,7 +126,7 @@ class App extends Component {
           <Button
             clickFunc={this.handleFilterViewToggleClick}
             className={"toggle-filter-view-button"}
-            text={'toggle filter view'}
+            text={this.state.show ? 'hide filters' : 'filter players'}
           />
           <div 
             id="scroll-box" 

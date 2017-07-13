@@ -6,7 +6,52 @@ import Header from '../components/Header'
 import FiltersContainer from './FiltersContainer'
 import PlayerListContainer from './PlayerListContainer'
 import PitchContainer from './PitchContainer'
-import Button from '../components/Button';
+import Button from '../components/Button'
+import Transition from 'react-transition-group/Transition'
+
+
+let filtersHeight = 0;
+
+class FilterSlide2 extends Component {
+
+  componentDidMount() {
+    filtersHeight = document.getElementById('player-filters').clientHeight
+  }
+
+  render(){
+
+    console.log(filtersHeight);
+
+    const duration = 300;
+    
+    const defaultStyle = {
+      transition: `margin-top ${duration}ms ease-in-out`,
+      marginTop: `-${filtersHeight}px`,
+      overflow: 'hidden'
+    }
+
+    const transitionStyles = {
+      entering: { marginTop: 0 },
+      entered:  { marginTop: 0 },
+    };
+
+    return(
+
+      <Transition in={this.props.in} timeout={duration}>
+        {(state) => (
+          <div style={{
+            ...defaultStyle,
+            ...transitionStyles[state]
+          }}>
+            {this.props.children}
+          </div>
+        )}
+      </Transition>
+    );
+  }
+}
+
+
 
 class App extends Component {
   static propTypes = {
@@ -33,7 +78,9 @@ class App extends Component {
   }
 
   handleFilterViewToggleClick = e => {
-    console.log('HIT');
+    this.setState({show: !this.state.show})
+    
+
   }
 
   rowsPerRender = 30
@@ -42,8 +89,8 @@ class App extends Component {
 
     //INFINITE SCROLL
 
-    let boxHight = document.getElementById(e.target.id).clientHeight;
-    let offset = (Number(e.target.scrollHeight)-Number(boxHight));
+    let boxHeight = document.getElementById(e.target.id).clientHeight;
+    let offset = (Number(e.target.scrollHeight)-Number(boxHeight));
 
     if (e.target.scrollTop >= (offset-(offset/10))) {
       this.rowsPerRender += 15;
@@ -52,26 +99,40 @@ class App extends Component {
   }
 
 
+  state = {
+  show:false
+  }
+
   render() {
     const {clubs, isFetchingClub, positions, isFetchingPosition, players, isFetchingPlayers} = this.props
 
     return (
 		<div>
+
+
+
+      
+
 			<Header />
-			
+
+
+
+
       <div className="drafts">
 
         <PitchContainer />
 
         <div className="player-selection">
 
-          <div className="player-filters" style={{ opacity: (isFetchingClub || isFetchingPosition) ? 0.2 : 1 }}>
-            <FiltersContainer 
-              positions={positions} 
-              clubs={clubs} 
-              onClick={() => this.handlePlayerRefreshClick} 
-              isFetching={isFetchingPlayers}
-            />
+          <div  id="player-filters" className={"player-filters"} style={{ opacity: (isFetchingClub || isFetchingPosition) ? 0.2 : 1 }}>
+            <FilterSlide2 in={this.state.show}>
+              <FiltersContainer
+                positions={positions} 
+                clubs={clubs} 
+                onClick={() => this.handlePlayerRefreshClick} 
+                isFetching={isFetchingPlayers}
+              />
+            </FilterSlide2>
           </div>
           <Button
             clickFunc={this.handleFilterViewToggleClick}

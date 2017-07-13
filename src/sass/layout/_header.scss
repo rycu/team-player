@@ -1,5 +1,10 @@
 .header{
 
 	height: 4em;
+	z-index: 100;
+    position: fixed;
+   	background-color: #333;
+   	color: #eee;
+    width: 100%;
 }
 

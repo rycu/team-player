@@ -88,6 +88,7 @@ export default class PlayerRow extends Component {
 
 					return (this.displayRow(player, rank) && i <= rowsPerRender) ? 
 						<Row 
+							key={i}
 							playerId={player.id}
 							fullName={player.first_name + ' ' + player.second_name}
 							cost={player.now_cost}

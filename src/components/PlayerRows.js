@@ -77,42 +77,35 @@ export default class PlayerRow extends Component {
 
 
 	charFix (stringIn = "HÃ©ctor BellerÃ­n"){
-		var regex = "[^ -~]"
-		//var rx = new RegExp( searchPattern, "gim" )
-		
-
-		var found = stringIn.match(regex);
-
+		//replace ascii chars
+		var charRelation = [
+			['Ã©', 'é'],
+			['Ã–', 'Ö'],
+			['Ã¡', 'á'],
+			['Ãµ' , 'õ'],
+			['Ã³' , 'ó'],
+			['Ã±' , 'ñ'],
+			['Ã¶' , 'ö'],
+			['Ã¥' , 'å'],
+			['Ã¸' , 'ø'],
+			['Ãº' , 'ú'],
+			['Ã¼' , 'ü'],
+			['Ã«' , 'ë'],
+			['Ã¯' , 'ï'],
+			['Ã' , 'í'],
+		]
+		let found = stringIn.match("[^ -~]");
 		let stringOut = stringIn;
-			
-			if(found){
-				console.log(found[0]);
-
-				
-
-				switch (found[0]) {
-					case 'Ã':
-						stringOut = stringOut.replace(/Ã©/gi, 'é');
-						stringOut = stringOut.replace(/Ã–/gi, 'Ö');
-						stringOut = stringOut.replace(/Ã¡/gi, 'á');
-						stringOut = stringOut.replace(/Ã/gi, 'í');
-						console.log(stringOut);
-					break;
-					default:
-						console.log('NOT HIT');
-				}
+		if(found){
+			charRelation.forEach(function(e) {
+				let rx = new RegExp(e[0],"gi");
+				stringOut = stringOut.replace(rx, e[1]);
+			})
 		}
-
 		return stringOut
 	}
 
-
-
-
-
 	render() {
-
-		
 
 		const {players, rowsPerRender, clubs, positions} = this.props;
 		const { selection__players } = this.props.selection
@@ -122,14 +115,25 @@ export default class PlayerRow extends Component {
 				{players.map((player, i) => {
 					// made up rank out of 10 (approx)
 					let rank =  Math.round(((Number(player.ict_index)+Number(player.now_cost*15))/225)*10)/10;
+					rank = isNaN(rank) ? '' : rank
 					// made up form out of 10 (approx)
 					let form =  Math.round((player.ict_index/50)*10)/10;
+					form = isNaN(form) ? '' : form
+					
+					 
+					//replace really long names with short ones.
+					let fullName = player.first_name + ' ' + player.second_name
+					if(fullName.length > 17){
+						fullName = player.web_name+'*'
+					}
 
+					//THIS DONT WORK. STEP CONDITIONS TO ENSURE ROW QUOTA IS MET
 					return (this.displayRow(player, rank) && i <= rowsPerRender) ? 
+						
 						<Row 
 							key={i}
 							playerId={player.id}
-							fullName={this.charFix(player.first_name + ' ' + player.second_name)}
+							fullName={this.charFix(fullName)}
 							cost={player.now_cost}
 							club={clubs[player.team-1].short_name}
 							position={positions[player.element_type-1].plural_name_short}
@@ -138,8 +142,8 @@ export default class PlayerRow extends Component {
 							selected={this.playerSelected(selection__players, player.id)} 
 							selectPlayer = {() => this.handleClick(player.id)}
 						/> : null
-					}
-				)}
+					
+				})}
 			</ul>
 		)
 	}

@@ -18,7 +18,7 @@ class FilterSlide extends Component {
 
     const defaultStyle = {
       transition: `margin-top ${duration}ms ease-in-out`,
-      marginTop: '-250px'
+      marginTop: '-260px'
     }
 
     const transitionStyles = {

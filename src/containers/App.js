@@ -9,24 +9,16 @@ import PitchContainer from './PitchContainer'
 import Button from '../components/Button'
 import Transition from 'react-transition-group/Transition'
 
-let filtersHeight = 0;
 
-class FilterSlide2 extends Component {
-
-  componentDidMount() {
-    filtersHeight = document.getElementById('player-filters').clientHeight
-  }
+class FilterSlide extends Component {
 
   render(){
 
-    console.log(filtersHeight);
+    const duration = 500;
 
-    const duration = 300;
-    
     const defaultStyle = {
       transition: `margin-top ${duration}ms ease-in-out`,
-      marginTop: `-${filtersHeight}px`,
-      overflow: 'hidden'
+      marginTop: '-250px'
     }
 
     const transitionStyles = {
@@ -94,7 +86,6 @@ class App extends Component {
     }
   }
 
-
   state = {
   show:false
   }
@@ -114,14 +105,14 @@ class App extends Component {
         <div className="player-selection">
 
           <div  id="player-filters" className={"player-filters"} style={{ opacity: (isFetchingClub || isFetchingPosition) ? 0.2 : 1 }}>
-            <FilterSlide2 in={this.state.show}>
+            <FilterSlide in={this.state.show}>
               <FiltersContainer
                 positions={positions} 
                 clubs={clubs} 
                 onClick={() => this.handlePlayerRefreshClick} 
                 isFetching={isFetchingPlayers}
               />
-            </FilterSlide2>
+            </FilterSlide>
           </div>
           <Button
             clickFunc={this.handleFilterViewToggleClick}

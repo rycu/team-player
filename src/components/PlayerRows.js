@@ -75,9 +75,48 @@ export default class PlayerRow extends Component {
 		this.props.togglePlayerSelect(Number(id));
 	}
 
+
+	charFix (stringIn = "HÃ©ctor BellerÃ­n"){
+		var regex = "[^ -~]"
+		//var rx = new RegExp( searchPattern, "gim" )
+		
+
+		var found = stringIn.match(regex);
+
+		let stringOut = stringIn;
+			
+			if(found){
+				console.log(found[0]);
+
+				
+
+				switch (found[0]) {
+					case 'Ã':
+						stringOut = stringOut.replace(/Ã©/gi, 'é');
+						stringOut = stringOut.replace(/Ã–/gi, 'Ö');
+						stringOut = stringOut.replace(/Ã¡/gi, 'á');
+						stringOut = stringOut.replace(/Ã/gi, 'í');
+						console.log(stringOut);
+					break;
+					default:
+						console.log('NOT HIT');
+				}
+		}
+
+		return stringOut
+	}
+
+
+
+
+
 	render() {
+
+		
+
 		const {players, rowsPerRender, clubs, positions} = this.props;
 		const { selection__players } = this.props.selection
+
 		return(
 			<ul>
 				{players.map((player, i) => {
@@ -90,7 +129,7 @@ export default class PlayerRow extends Component {
 						<Row 
 							key={i}
 							playerId={player.id}
-							fullName={player.first_name + ' ' + player.second_name}
+							fullName={this.charFix(player.first_name + ' ' + player.second_name)}
 							cost={player.now_cost}
 							club={clubs[player.team-1].short_name}
 							position={positions[player.element_type-1].plural_name_short}

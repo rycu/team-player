@@ -71,7 +71,7 @@ class App extends Component {
     this.setState({show: !this.state.show})
   }
 
-  rowsPerRender = 30
+  rowsPerRender = 29
 
   handlePlayerListScroll = e => {
 

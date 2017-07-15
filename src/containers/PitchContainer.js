@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 //import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-class pitchContainer extends Component {
+class PitchContainer extends Component {
   static propTypes = {
     //onClick: PropTypes.func.isRequired
   }
@@ -29,5 +29,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(pitchContainer)
+export default connect(mapStateToProps)(PitchContainer)
 

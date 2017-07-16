@@ -10,39 +10,40 @@ import Button from '../components/Button'
 import Transition from 'react-transition-group/Transition'
 
 
-class FilterSlide extends Component {
-
-  render(){
+//Stateless ES6 Function component the slide transition of the filters component
+const FilterSlide = ({children, show}) => {
 
     const duration = 500;
-
     const defaultStyle = {
       transition: `margin-top ${duration}ms ease-in-out`,
       marginTop: '-260px'
     }
-
     const transitionStyles = {
       entering: { marginTop: 0 },
       entered:  { marginTop: 0 },
     };
 
     return(
-
-      <Transition in={this.props.in} timeout={duration}>
+      <Transition in={show} timeout={duration}>
         {(state) => (
           <div style={{
             ...defaultStyle,
             ...transitionStyles[state]
           }}>
-            {this.props.children}
+            {children}
           </div>
         )}
       </Transition>
     );
-  }
+}
+
+FilterSlide.propTypes = {
+  children: PropTypes.object.isRequired,
+  show: PropTypes.bool.isRequired,
 }
 
 
+//Main App component 
 class App extends Component {
   static propTypes = {
     positions: PropTypes.array.isRequired,
@@ -54,6 +55,12 @@ class App extends Component {
     dispatch: PropTypes.func.isRequired
   }
 
+  //hide filters as default
+  state = {
+    showfilters:false
+  }
+
+  //dispatch API calls on mount
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(fetchDataIfNeeded('clubList', 'premTeams'))
@@ -61,83 +68,90 @@ class App extends Component {
     dispatch(fetchDataIfNeeded('playerList', 'premElements'))
   }
 
+  //invalidate and refresh playerList data
   handlePlayerRefreshClick = () => {
     const { dispatch } = this.props
     dispatch(invalidateData('playerList'))
     dispatch(fetchDataIfNeeded('playerList', 'premElements'))
   }
 
+  //toggle filter view state
   handleFilterViewToggleClick = e => {
-    this.setState({show: !this.state.show})
+    this.setState({showfilters: !this.state.showfilters})
   }
 
+  //Infinite scroll(ish) for PlayerListContainer 
   rowsPerRender = 29
-
   handlePlayerListScroll = e => {
-
-    //INFINITE SCROLL
-
     let boxHeight = document.getElementById(e.target.id).clientHeight;
     let offset = (Number(e.target.scrollHeight)-Number(boxHeight));
-
     if (e.target.scrollTop >= (offset-(offset/10))) {
       this.rowsPerRender += 15;
       this.forceUpdate();
     }
   }
 
-  state = {
-  show:false
-  }
-
+  //Finally the render
   render() {
-    const {clubs, isFetchingClub, positions, isFetchingPosition, players, isFetchingPlayers} = this.props
-
+    
+    const {
+      clubs, 
+      isFetchingClub, 
+      positions, 
+      isFetchingPosition, 
+      players, 
+      isFetchingPlayers
+    } = this.props
+    
     return (
-		<div>
+  		<div>
+  			
+        <Header />
 
-			<Header />
+        <div className="drafts">
 
-      <div className="drafts">
+          <PitchContainer />
 
-        <PitchContainer />
+          <div className="player-selection">
 
-        <div className="player-selection">
+            <div  id="player-filters" className={"player-filters"} style={{ opacity: (isFetchingClub || isFetchingPosition) ? 0.2 : 1 }}>
+              <FilterSlide show={this.state.showfilters}>
+                <FiltersContainer
+                  positions={positions} 
+                  clubs={clubs} 
+                  onClick={() => this.handlePlayerRefreshClick} 
+                  isFetching={isFetchingPlayers}
+                />
+              </FilterSlide>
+            </div>
 
-          <div  id="player-filters" className={"player-filters"} style={{ opacity: (isFetchingClub || isFetchingPosition) ? 0.2 : 1 }}>
-            <FilterSlide in={this.state.show}>
-              <FiltersContainer
-                positions={positions} 
-                clubs={clubs} 
-                onClick={() => this.handlePlayerRefreshClick} 
-                isFetching={isFetchingPlayers}
-              />
-            </FilterSlide>
-          </div>
-          <Button
-            clickFunc={this.handleFilterViewToggleClick}
-            className={"toggle-filter-view-button"}
-            text={this.state.show ? 'hide filters' : 'filter players'}
-          />
-          <div 
-            id="scroll-box" 
-            onScroll={this.handlePlayerListScroll} 
-            className="player-list" 
-            style={{ opacity: isFetchingPlayers ? 0.2 : 1 }}>
-            <PlayerListContainer 
-              players={players} 
-              isFetching={isFetchingPlayers}
-              rowsPerRender={this.rowsPerRender}
+            <Button
+              clickFunc={this.handleFilterViewToggleClick}
+              className={"toggle-filter-view-button"}
+              text={this.state.showFilters ? 'hide filters' : 'filter players'}
             />
-          </div>
-          <div>
-            STATS
+
+            <div 
+              id="scroll-box" 
+              onScroll={this.handlePlayerListScroll} 
+              className="player-list" 
+              style={{ opacity: isFetchingPlayers ? 0.2 : 1 }}>
+              <PlayerListContainer 
+                players={players} 
+                isFetching={isFetchingPlayers}
+                rowsPerRender={this.rowsPerRender}
+              />
+            </div>
+
+            <div>
+              STATS
+            </div>
+
           </div>
 
         </div>
 
-      </div>
-		</div>
+  		</div>
     )
   }
 }

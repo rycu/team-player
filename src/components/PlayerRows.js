@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import Button from '../components/Button';
 
+//Presentational Component for Row using simple ES6 slambda function
 const Row = ({playerId, fullName, cost, club, position, rank, form, selected , selectPlayer}) => (
 
 	<li 
@@ -30,6 +31,7 @@ export default class PlayerRow extends Component {
 		rowsPerRender: PropTypes.number.isRequired
 	}
 
+	//Checks to see if the row should be displayed under the current filter conditions
 	displayRow(player, rank){
 
 		const { filters__name, 
@@ -40,42 +42,38 @@ export default class PlayerRow extends Component {
 			} = this.props.filters
 
 		let playerName = player.first_name + ' ' + player.second_name; 
-
+		
 		if(!playerName.toLowerCase().includes(filters__name.toLowerCase())){
 			return false;
 		}
-
 		if(!filters__position.includes(player.element_type)){
 			return false;
 		}
-
 		if(player.team !== filters__club && filters__club !== 0){
 			return false;
 		}
-
 		if(player.now_cost < filters__price.lowVal || player.now_cost > filters__price.highVal){
 			return false;
 		}
-
 		if(rank < filters__rank.lowVal || rank > filters__rank.highVal){
 			return false;
 		}
 
 		return true;
-
 	}
 
+	//checks to see if player is selected for the team 
 	playerSelected(selection__players, playerId){
 		return 	selection__players.includes(playerId) ? true : false;
 	}
 
-	handleClick = (id) => {
+	//pushes player selection request along to redux
+	handleSelectPlayer = (id) => {
 		this.props.togglePlayerSelect(Number(id));
 	}
 
-
+	//replaces bad ascii chars from data source
 	charFix (stringIn){
-		//replace ascii chars
 		var charRelation = [
 			['Ã©', 'é'],
 			['Ã–', 'Ö'],
@@ -103,6 +101,7 @@ export default class PlayerRow extends Component {
 		return stringOut
 	}
 
+	//builds array of player rows for the render
 	returnRows(){
 
 		const {players, rowsPerRender, clubs, positions} = this.props;
@@ -137,7 +136,7 @@ export default class PlayerRow extends Component {
 						rank={rank} 
 						form={form}
 						selected={this.playerSelected(selection__players, player.id)} 
-						selectPlayer = {() => this.handleClick(player.id)}
+						selectPlayer = {() => this.handleSelectPlayer(player.id)}
 					/>
 				)
 			}

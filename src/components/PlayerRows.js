@@ -109,15 +109,15 @@ export default class PlayerRow extends Component {
 
 		var rowArr = []
 
-		players.map((player, i) => {
+		players.forEach((player, i) => {
+		//players.map(function(player, i){
 			// made up rank out of 10 (approx)
 			let rank =  Math.round(((Number(player.ict_index)+Number(player.now_cost*15))/225)*10)/10;
 			rank = isNaN(rank) ? '' : rank
 			// made up form out of 10 (approx)
 			let form =  Math.round((player.ict_index/50)*10)/10;
 			form = isNaN(form) ? '' : form
-			
-			 
+
 			//replace really long names with short ones.
 			let fullName = player.first_name + ' ' + player.second_name
 			if(fullName.length > 17){
@@ -140,9 +140,7 @@ export default class PlayerRow extends Component {
 					/>
 				)
 			}
-			return 'SHOULDNT BE ARROW FUNC'
 		})
-		//console.log(rowArr.length);
 		return rowArr;
 	}
 

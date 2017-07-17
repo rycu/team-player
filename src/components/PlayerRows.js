@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import Button from '../components/Button';
 
-//Presentational Component for Row using simple ES6 slambda function
+//Presentational Component for Row using simple ES6 lambda function (kept separate for easy styling)
 const Row = ({playerId, fullName, cost, club, position, rank, form, selected , selectPlayer}) => (
 
 	<li 
@@ -74,22 +74,7 @@ export default class PlayerRow extends Component {
 
 	//replaces bad ascii chars from data source
 	charFix (stringIn){
-		var charRelation = [
-			['Ã©', 'é'],
-			['Ã–', 'Ö'],
-			['Ã¡', 'á'],
-			['Ãµ' , 'õ'],
-			['Ã³' , 'ó'],
-			['Ã±' , 'ñ'],
-			['Ã¶' , 'ö'],
-			['Ã¥' , 'å'],
-			['Ã¸' , 'ø'],
-			['Ãº' , 'ú'],
-			['Ã¼' , 'ü'],
-			['Ã«' , 'ë'],
-			['Ã¯' , 'ï'],
-			['Ã' , 'í'],
-		]
+		var charRelation = [['Ã©', 'é'],['Ã–', 'Ö'],['Ã¡', 'á'],['Ãµ', 'õ'],['Ã³', 'ó'],['Ã±', 'ñ'],['Ã¶', 'ö'],['Ã¥', 'å'],['Ã¸', 'ø'],['Ãº', 'ú'],['Ã¼', 'ü'],['Ã«', 'ë'],['Ã¯' , 'ï'],['Ã' , 'í']]
 		let found = stringIn.match("[^ -~]");
 		let stringOut = stringIn;
 		if(found){
@@ -101,53 +86,57 @@ export default class PlayerRow extends Component {
 		return stringOut
 	}
 
-	//builds array of player rows for the render
-	returnRows(){
+	//replace really long names with short ones.
+	displayName(first_name, second_name, web_name){
 
-		const {players, rowsPerRender, clubs, positions} = this.props;
-		const { selection__players } = this.props.selection
+		let fullName = first_name + ' ' + second_name
+		return fullName.length < 18 ? fullName : web_name+'*'
+	}
 
-		var rowArr = []
+	// made up rank out of 10 (approx)
+	fabricateRank(ict_index, now_cost){
+		let rank = Math.round(((Number(ict_index)+Number(now_cost*15))/225)*10)/10;
+		return isNaN(rank) ? '' : rank
+	}
 
-		players.forEach((player, i) => {
-		//players.map(function(player, i){
-			// made up rank out of 10 (approx)
-			let rank =  Math.round(((Number(player.ict_index)+Number(player.now_cost*15))/225)*10)/10;
-			rank = isNaN(rank) ? '' : rank
-			// made up form out of 10 (approx)
-			let form =  Math.round((player.ict_index/50)*10)/10;
-			form = isNaN(form) ? '' : form
-
-			//replace really long names with short ones.
-			let fullName = player.first_name + ' ' + player.second_name
-			if(fullName.length > 17){
-				fullName = player.web_name+'*'
-			}
-
-			if(this.displayRow(player, rank) && rowArr.length <= rowsPerRender){ 
-				rowArr.push(
-					<Row 
-						key={i}
-						playerId={player.id}
-						fullName={this.charFix(fullName)}
-						cost={player.now_cost}
-						club={clubs[player.team-1].short_name}
-						position={positions[player.element_type-1].plural_name_short}
-						rank={rank} 
-						form={form}
-						selected={this.playerSelected(selection__players, player.id)} 
-						selectPlayer = {() => this.handleSelectPlayer(player.id)}
-					/>
-				)
-			}
-		})
-		return rowArr;
+	// made up form out of 10 (approx)
+	fabricateForm(ict_index){
+		let form = Math.round((ict_index/50)*10)/10;
+		return isNaN(form) ? '' : form
 	}
 
 	render() {
+
+		const {players, rowsPerRender, clubs, positions} = this.props;
+		const { selection__players } = this.props.selection
+		
+		//returns new array of Rows from filtering players array, slicing it to the rowsPerRender value and mapping
 		return(
 			<ul>
-				{this.returnRows()}
+				{players.filter((player) => {
+					return this.displayRow(player, this.fabricateRank(player.ict_index, player.now_cost))
+				}).slice(0, rowsPerRender).map((player) => {
+					return <Row 
+						key={player.id}
+						playerId={player.id}
+						fullName={
+							this.charFix(
+								this.displayName(
+									player.first_name, 
+									player.second_name,
+									player.web_name
+								) 
+							)
+						}
+						cost={player.now_cost}
+						club={clubs[player.team-1].short_name}
+						position={positions[player.element_type-1].plural_name_short}
+						rank={this.fabricateRank(player.ict_index, player.now_cost)} 
+						form={this.fabricateForm(player.ict_index)}
+						selected={this.playerSelected(selection__players, player.id)} 
+						selectPlayer = {() => this.handleSelectPlayer(player.id)}
+					/>
+				})}
 			</ul>
 		)
 	}

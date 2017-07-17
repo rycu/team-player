@@ -81,7 +81,7 @@ class App extends Component {
   }
 
   //Infinite scroll(ish) for PlayerListContainer 
-  rowsPerRender = 29
+  rowsPerRender = 30
   handlePlayerListScroll = e => {
     let boxHeight = document.getElementById(e.target.id).clientHeight;
     let offset = (Number(e.target.scrollHeight)-Number(boxHeight));

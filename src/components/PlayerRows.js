@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Button from '../components/Button';
 
 //Presentational Component for Row using simple ES6 lambda function (kept separate for easy styling)
-const Row = ({playerId, fullName, cost, club, position, rank, form, selected , selectPlayer}) => (
+const Row = ({playerId,fullName, cost, club, position, rank, form, selected , selectPlayer}) => (
 
 	<li 
 		className={selected ? "player-list__row player-list__row--selected" : "player-list__row"} 
@@ -26,7 +26,7 @@ const Row = ({playerId, fullName, cost, club, position, rank, form, selected , s
 export default class PlayerRow extends Component {
 	
 	static propTypes = {
-		players: PropTypes.array.isRequired,
+		data__players: PropTypes.array.isRequired,
 		togglePlayerSelect: PropTypes.func.isRequired,
 		rowsPerRender: PropTypes.number.isRequired
 	}
@@ -72,7 +72,7 @@ export default class PlayerRow extends Component {
 		this.props.togglePlayerSelect(Number(id));
 	}
 
-	//replaces bad ascii chars from data source
+	//replaces bad ASCII chars from data source
 	charFix (stringIn){
 		var charRelation = [['Ã©', 'é'],['Ã–', 'Ö'],['Ã¡', 'á'],['Ãµ', 'õ'],['Ã³', 'ó'],['Ã±', 'ñ'],['Ã¶', 'ö'],['Ã¥', 'å'],['Ã¸', 'ø'],['Ãº', 'ú'],['Ã¼', 'ü'],['Ã«', 'ë'],['Ã¯' , 'ï'],['Ã' , 'í']]
 		let found = stringIn.match("[^ -~]");
@@ -107,13 +107,13 @@ export default class PlayerRow extends Component {
 
 	render() {
 
-		const {players, rowsPerRender, clubs, positions} = this.props;
+		const {data__players, rowsPerRender, data__clubs, data__positions} = this.props;
 		const { selection__players } = this.props.selection
-		
+
 		//returns new array of Rows from filtering players array, slicing it to the rowsPerRender value and mapping
 		return(
 			<ul>
-				{players.filter((player) => {
+				{data__players.filter((player) => {
 					return this.displayRow(player, this.fabricateRank(player.ict_index, player.now_cost))
 				}).slice(0, rowsPerRender).map((player) => {
 					return <Row 
@@ -129,8 +129,8 @@ export default class PlayerRow extends Component {
 							)
 						}
 						cost={player.now_cost}
-						club={clubs[player.team-1].short_name}
-						position={positions[player.element_type-1].plural_name_short}
+						club={data__clubs[player.team-1].short_name}
+						position={data__positions[player.element_type-1].plural_name_short}
 						rank={this.fabricateRank(player.ict_index, player.now_cost)} 
 						form={this.fabricateForm(player.ict_index)}
 						selected={this.playerSelected(selection__players, player.id)} 

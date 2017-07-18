@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 
 export default class FilterByClub extends Component {
+	
 	static propTypes = {
 		updateClubFilter: PropTypes.func.isRequired,
-		clubId: PropTypes.number,
-		clubs: PropTypes.array.isRequired
+		clubId: PropTypes.number.isRequired,
+		data__clubs: PropTypes.array.isRequired,
+		className: PropTypes.string
 	};
 
 	handleChange = e => {
@@ -14,16 +16,16 @@ export default class FilterByClub extends Component {
 	}
 
 	render() {
-		let {clubId, clubs} = this.props;
+		let {clubId, data__clubs, className} = this.props;
 
 		return (
-			<div className={this.props.className}>
+			<div className={className}>
 				<select 
 					value={clubId}
 					onChange={this.handleChange}
 				>
 					<option value='' key="0">All Premier League Clubs</option>
-					{clubs.map((club) =>
+					{data__clubs.map((club) =>
 						<option value={club.id} key={club.id}>{club.name}</option>
 					)}
 				</select>

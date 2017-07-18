@@ -8,7 +8,6 @@ import FilterByPosition from '../components/FilterByPosition';
 import Button from '../components/Button';
 import DualRange from '../components/DualRange';
 
-//LATER SET TO ONLY CALL FILTERS
 import { 
   updateNameFilter, 
   updateClubFilter, 
@@ -20,7 +19,7 @@ import {
 
 let filterClass = 'player-filters';
 
-const FiltersContainer = ({filterState, clubs, positions, onClick, isFetching, actions}) => (
+const FiltersContainer = ({filterState, data__clubs, data__positions, onClick, isFetching, actions}) => (
     <div>
 
     	<FilterByName 
@@ -31,14 +30,14 @@ const FiltersContainer = ({filterState, clubs, positions, onClick, isFetching, a
       />
 
       <FilterByClub
-        clubs={clubs}
+        data__clubs={data__clubs}
         clubId={filterState.filters__club} 
         updateClubFilter={actions.updateClubFilter}
         className={filterClass +" player-filters__club"}
       />
 
       <FilterByPosition
-        positions={positions}
+        data__positions={data__positions}
         positionArr={filterState.filters__position} 
         updatePositionFilter={actions.updatePositionFilter}
         className={filterClass +" player-filters__position"}
@@ -88,8 +87,8 @@ const FiltersContainer = ({filterState, clubs, positions, onClick, isFetching, a
 
 FiltersContainer.propTypes = {
   filterState: PropTypes.object.isRequired,
-  positions: PropTypes.array.isRequired,
-  clubs: PropTypes.array.isRequired,
+  data__positions: PropTypes.array.isRequired,
+  data__clubs: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
 

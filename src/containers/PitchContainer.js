@@ -8,8 +8,6 @@ class PitchContainer extends Component {
   }
 
 
-
-
   render() {
     //const {filters} = this.props
 

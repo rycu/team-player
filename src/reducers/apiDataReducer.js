@@ -4,7 +4,7 @@ import {
   RECEIVE_DATA
 } from '../constants/ActionTypes'
 
-function players(
+function prepStateUpdate(
   state = {
     isFetching: false,
     didInvalidate: false,
@@ -26,7 +26,7 @@ function players(
       return Object.assign({}, state, {
         isFetching: false,
         didInvalidate: false,
-        items: action.players,
+        items: action.data_in,
         lastUpdated: action.receivedAt
       })
     default:
@@ -41,7 +41,7 @@ export default function apiData(state = {}, action) {
     case REQUEST_DATA:
       //console.log(action);
       return Object.assign({}, state, {
-        [action.dataName]: players(state[action.dataName], action)
+        [action.dataName]: prepStateUpdate(state[action.dataName], action)
       })
     default:
       return state

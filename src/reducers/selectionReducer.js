@@ -21,6 +21,7 @@ export default function selection(state = initialState, action) {
 				selection__name: action.nameTxt
 			})
 
+
 		case TOGGLE_PLAYER_SELECT:
 
 			var newplayersArr = state.selection__players.slice();

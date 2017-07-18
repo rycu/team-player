@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 export default class FilterByName extends Component {
 	
 	static propTypes = {
-		//updateNameFilter: PropTypes.func.isRequired,
+		updateNameFilter: PropTypes.func.isRequired,
+		placeholder: PropTypes.string,
 		nameTxt: PropTypes.string,
-		placeholder: PropTypes.string
+		className: PropTypes.string
 	};
 
 	static defaultProps = {
@@ -14,7 +15,7 @@ export default class FilterByName extends Component {
 	};
 
 	state = {
-	    nameTxt: this.props.nameTxt || ''
+	    nameTxt: this.props.nameTxt
 	}
 
 	handleChange = e => {
@@ -23,11 +24,10 @@ export default class FilterByName extends Component {
 	}
 
 	render() {
-		let placeholder = this.props.placeholder;
-		let nameTxt = this.props.nameTxt;
-		//console.log(nameTxt);
+		let {placeholder, nameTxt, className} = this.props
+		
 		return (
-			<div className={this.props.className}>
+			<div className={className}>
 
 				<input 
 					type="text" 

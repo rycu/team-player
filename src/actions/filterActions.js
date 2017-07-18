@@ -1,11 +1,11 @@
 import * as types from '../constants/ActionTypes'
 
-//ACTION CREATOR (func)
+//Action creator (func)
 export const updateNameFilter = nameTxt => (
 		
-		//ACTION (obj)
+		//Action (obj)
 		{ 
-			//ACTION TYPE (type: requied prop, nameTxt: val sting)
+			//Action type (type: required prop)
 			type: types.UPDATE_NAME_FILTER, 
 			nameTxt
 		}

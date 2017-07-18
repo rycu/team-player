@@ -16,7 +16,7 @@ const initialState =
     filters__rank: {lowVal: 0, highVal: 10} 
   };
 
-//ES6 default arguments syntax for state arg
+//ES6 default argument syntax for state  s
 export default function filters(state = initialState, action) {
 	switch (action.type) {
 
@@ -27,18 +27,6 @@ export default function filters(state = initialState, action) {
 				filters__name: action.nameTxt
 			})
 
-			// return
-			// 	{
-			// 		nameFilter: action.text
-			// 	}, ...state
-			// 
-
-			// return 
-			// ...state,
-			// 	{
-			// 		nameFilter: action.text
-			// 	}
-			// 
 
 		case UPDATE_CLUB_FILTER:
 
@@ -63,7 +51,6 @@ export default function filters(state = initialState, action) {
 			return Object.assign({}, state, {
 				filters__position: newpositionArr
 			})
-
 
 		case UPDATE_PRICE_FILTER:
 

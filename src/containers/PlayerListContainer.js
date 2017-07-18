@@ -9,27 +9,26 @@ import {
 } from '../actions/selectionActions'
 
 
-
 class PlayerListContainer extends Component {
   static propTypes = {
-    players: PropTypes.array.isRequired,
+    data__players: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     rowsPerRender:  PropTypes.number.isRequired
   }
 
   render() {
     const {
-      players, 
+      data__players, 
       isFetching, 
       rowsPerRender, 
-      clubs, 
-      positions, 
+      data__clubs, 
+      data__positions, 
       filters, 
       selection, 
       actions
     } = this.props
     
-    const isEmpty = players.length === 0
+    const isEmpty = data__players.length === 0
 
     return (
       <div>
@@ -37,10 +36,10 @@ class PlayerListContainer extends Component {
           ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
           : <div>
               <PlayerRows 
-                players={players} 
+                data__players={data__players} 
                 filters={filters} 
-                positions={positions} 
-                clubs={clubs} 
+                data__positions={data__positions} 
+                data__clubs={data__clubs} 
                 togglePlayerSelect={actions.togglePlayerSelect} 
                 selection={selection}
                 rowsPerRender={rowsPerRender}
@@ -56,19 +55,19 @@ const mapStateToProps = state => {
   const {filters, apiData, selection} = state
 
   const {
-    items: clubs
+    items: data__clubs
   } = apiData['clubList'] || {
     items: []
   }
   const {
-    items: positions
+    items: data__positions
   } = apiData['positionList'] || {
     items: []
   }
   return {
     filters,
-    clubs,
-    positions,
+    data__clubs,
+    data__positions,
     selection
   }
 }
@@ -79,10 +78,8 @@ const mapDispatchToProps = dispatch => ({
     }, dispatch)
 })
 
-
 export default connect(
   mapStateToProps, 
   mapDispatchToProps
-
-  )(PlayerListContainer)
+)(PlayerListContainer)
 

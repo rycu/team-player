@@ -16,14 +16,16 @@ function requestData(dataName) {
 }
 
 function receiveData(json, dataName) {
-  
   return {
     type: types.RECEIVE_DATA,
     dataName,
-    players: json.map(child => child),
+    data_in: json.map(child => child),
     receivedAt: Date.now()
   }
 }
+
+
+//thunk action creators
 
 function fetchData(dataName, dataSlug) {
   return dispatch => {
@@ -35,13 +37,13 @@ function fetchData(dataName, dataSlug) {
 }
 
 function shouldFetchData(dataName, state) {
-  const players = state.apiData[dataName]
-  if (!players) {
+  const data = state.apiData[dataName]
+  if (!data) {
     return true
-  } else if (players.isFetching) {
+  } else if (data.isFetching) {
     return false
   } else {
-    return players.didInvalidate
+    return data.didInvalidate
   }
 }
 

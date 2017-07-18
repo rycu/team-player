@@ -13,21 +13,21 @@ export default class dualRange extends Component {
 		unit: PropTypes.string
 	}
 
-	//SET COMPONENT STATE FROM REDUX
+	//Set component state from redux
 	state = {
 	    lowVal: this.props.rangeObj.lowVal,
 	    highVal: this.props.rangeObj.highVal
 	}
 
 	componentWillReceiveProps(nextProps){
-		//GETS NEW STATE FROM PROPS IF UPDATED
+		//Gets new state from props if updated
 			this.setState({
 				lowVal: nextProps.rangeObj.lowVal,
 				highVal: nextProps.rangeObj.highVal
 			})
 	}
 
-	//ENSURES CORRECT MINIMUM VALUE RANGE IS MAINTAINED 
+	//Ensures correct minimum value range is maintained 
 	overlapCorrect(id){
 		let lowVal = this.state.lowVal;
 		let highVal = this.state.highVal;
@@ -47,13 +47,13 @@ export default class dualRange extends Component {
 		}
 	}
 
-	//UPDATES COMPONENT STATE 
+	//Updates component state 
 	updateState(id, value){
 		let lowMax = this.props.max-this.props.gap;
 		let highMin = this.props.min+this.props.gap;
 
 		if(
-			//ONLY UPDATE THUMB WITHIN LIMITS
+			//Only update thumb within limits
 			(id === 'low' && value >= this.props.min && value <= lowMax) ||
 			(id === 'high' && value >= highMin && value <= this.props.max)
 			){
@@ -68,7 +68,7 @@ export default class dualRange extends Component {
 		this.updateState(e.target.id, e.target.value, e.target.dataset.siblingvalue);
 	}
 
-	//ROUND FLOATING POINTS FOR STEPS LESS THAN 1
+	//Round floating points for steps less than 1
 	valueRound(value){
 		if (this.props.step<1) {
 			return Math.round( value * (1/this.props.step) ) / (1/this.props.step);
@@ -77,12 +77,12 @@ export default class dualRange extends Component {
 		}
 	}
 
-	//UPDATES REDUX STORE
+	//Updates redux store
 	handleSubmit = e => {
 		
 		let id = e.target.id;
 
-		//PROMICE ADDED TO WAIT FOR overlapCorrect() TO COMPLEATE BEFORE STORE UPDATE
+		//Promise added to wait for overlapCorrect() to complete before store update
 		let overlapSubmitPromice = new Promise((resolve, reject) => {
 				resolve(this.overlapCorrect(id));
 				reject('overlapCorrect Failed');
@@ -108,7 +108,7 @@ export default class dualRange extends Component {
 		return (
 			<div className={"dual-range " + this.props.className}>
 				
-				{/*SVG USED TO DISPLAY OUT OF RANGE AREAS*/}
+				{/*SVG used to display out of range areas*/}
 				<svg className="dual-range__out-of-range" width="100%" height="100%">
 					<rect 
 				  		width={((lowVal/this.props.max)*100)+'%'} 
@@ -123,7 +123,7 @@ export default class dualRange extends Component {
 				  	/>
 				</svg>
 
-				{/*LOWER RANGE SLIDER*/}
+				{/*Lower range slider*/}
 				<input className="dual-range__inputs"
 					id="low" 
 					type="range" 
@@ -137,7 +137,7 @@ export default class dualRange extends Component {
 					onTouchEnd={this.handleSubmit}
 				/>
 
-				{/*HIGHER RANGE SLIDER*/}
+				{/*Higher range slider*/}
 				<input className="dual-range__inputs"
 					id="high" 
 					type="range" 
@@ -149,10 +149,9 @@ export default class dualRange extends Component {
 					onMouseUp={this.handleSubmit}
 					onKeyUp={this.handleSubmit}
 					onTouchEnd={this.handleSubmit}
-
 				/>
 
-				{/*OUTPUT LABEL*/}
+				{/*Output label*/}
 				<label className="dual-range__label">{
 					this.valueRound(lowVal)+this.props.unit
 					} to {

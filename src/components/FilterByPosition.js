@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 export default class FilterByClub extends Component {
 	
 	static propTypes = {
+		data__positions: PropTypes.array.isRequired,
 		updatePositionFilter: PropTypes.func.isRequired,
-		positionArr: PropTypes.array
+		positionArr: PropTypes.array.isRequired
 	};
 
 	handleChange = e => {
@@ -14,15 +15,12 @@ export default class FilterByClub extends Component {
 
 	renderCheckbox(thisVal){
 
-		var checked;
-
-		if(this.props.positionArr){
-	      checked = this.props.positionArr.includes(thisVal) ? true : false
-	    }
+		let {positionArr, data__positions} = this.props
+		let checked = positionArr.includes(thisVal) ? true : false
 
 		return(
 			<li key={thisVal}>
-				<label htmlFor={thisVal}>{this.props.positions[thisVal-1].plural_name_short}</label>
+				<label htmlFor={thisVal}>{data__positions[thisVal-1].plural_name_short}</label>
 				<input type="checkbox" checked={checked} onChange={this.handleChange} id={thisVal}/>
 			</li>
 		);
@@ -31,7 +29,7 @@ export default class FilterByClub extends Component {
 	buildPosBoxes(){
 
 		var positions = [];
-		this.props.positions.map((position) =>
+		this.props.data__positions.map((position) =>
 			positions.push(position.id)
 		)
 		var rows = [];

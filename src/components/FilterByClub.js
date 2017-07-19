@@ -6,7 +6,7 @@ export default class FilterByClub extends Component {
 	static propTypes = {
 		updateClubFilter: PropTypes.func.isRequired,
 		clubId: PropTypes.number.isRequired,
-		data__clubs: PropTypes.array.isRequired,
+		apiData__clubs: PropTypes.array.isRequired,
 		className: PropTypes.string
 	};
 
@@ -16,7 +16,7 @@ export default class FilterByClub extends Component {
 	}
 
 	render() {
-		let {clubId, data__clubs, className} = this.props;
+		let {clubId, apiData__clubs, className} = this.props;
 
 		return (
 			<div className={className}>
@@ -25,7 +25,7 @@ export default class FilterByClub extends Component {
 					onChange={this.handleChange}
 				>
 					<option value='' key="0">All Premier League Clubs</option>
-					{data__clubs.map((club) =>
+					{apiData__clubs.map((club) =>
 						<option value={club.id} key={club.id}>{club.name}</option>
 					)}
 				</select>

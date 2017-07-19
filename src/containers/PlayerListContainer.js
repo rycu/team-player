@@ -11,24 +11,24 @@ import {
 
 class PlayerListContainer extends Component {
   static propTypes = {
-    data__players: PropTypes.array.isRequired,
+    apiData__players: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     rowsPerRender:  PropTypes.number.isRequired
   }
 
   render() {
     const {
-      data__players, 
+      apiData__players, 
       isFetching, 
       rowsPerRender, 
-      data__clubs, 
-      data__positions, 
+      apiData__clubs, 
+      apiData__positions, 
       filters, 
       selection, 
       actions
     } = this.props
     
-    const isEmpty = data__players.length === 0
+    const isEmpty = apiData__players.length === 0
 
     return (
       <div>
@@ -36,10 +36,10 @@ class PlayerListContainer extends Component {
           ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
           : <div>
               <PlayerRows 
-                data__players={data__players} 
+                apiData__players={apiData__players} 
                 filters={filters} 
-                data__positions={data__positions} 
-                data__clubs={data__clubs} 
+                apiData__positions={apiData__positions} 
+                apiData__clubs={apiData__clubs} 
                 togglePlayerSelect={actions.togglePlayerSelect} 
                 selection={selection}
                 rowsPerRender={rowsPerRender}
@@ -55,19 +55,19 @@ const mapStateToProps = state => {
   const {filters, apiData, selection} = state
 
   const {
-    items: data__clubs
-  } = apiData['clubList'] || {
+    items: apiData__clubs
+  } = apiData['apiData__clubs'] || {
     items: []
   }
   const {
-    items: data__positions
-  } = apiData['positionList'] || {
+    items: apiData__positions
+  } = apiData['apiData__positions'] || {
     items: []
   }
   return {
     filters,
-    data__clubs,
-    data__positions,
+    apiData__clubs,
+    apiData__positions,
     selection
   }
 }

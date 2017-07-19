@@ -19,7 +19,7 @@ import {
 
 let filterClass = 'player-filters';
 
-const FiltersContainer = ({filterState, data__clubs, data__positions, onClick, isFetching, actions}) => (
+const FiltersContainer = ({filterState, apiData__clubs, apiData__positions, onClick, isFetching, actions}) => (
     <div>
 
     	<FilterByName 
@@ -30,14 +30,14 @@ const FiltersContainer = ({filterState, data__clubs, data__positions, onClick, i
       />
 
       <FilterByClub
-        data__clubs={data__clubs}
+        apiData__clubs={apiData__clubs}
         clubId={filterState.filters__club} 
         updateClubFilter={actions.updateClubFilter}
         className={filterClass +" player-filters__club"}
       />
 
       <FilterByPosition
-        data__positions={data__positions}
+        apiData__positions={apiData__positions}
         positionArr={filterState.filters__position} 
         updatePositionFilter={actions.updatePositionFilter}
         className={filterClass +" player-filters__position"}
@@ -87,8 +87,8 @@ const FiltersContainer = ({filterState, data__clubs, data__positions, onClick, i
 
 FiltersContainer.propTypes = {
   filterState: PropTypes.object.isRequired,
-  data__positions: PropTypes.array.isRequired,
-  data__clubs: PropTypes.array.isRequired,
+  apiData__positions: PropTypes.array.isRequired,
+  apiData__clubs: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
 

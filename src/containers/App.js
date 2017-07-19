@@ -46,9 +46,9 @@ FilterSlide.propTypes = {
 //Main App component 
 class App extends Component {
   static propTypes = {
-    data__clubs: PropTypes.array.isRequired,
-    data__positions: PropTypes.array.isRequired,
-    data__players: PropTypes.array.isRequired,
+    apiData__clubs: PropTypes.array.isRequired,
+    apiData__positions: PropTypes.array.isRequired,
+    apiData__players: PropTypes.array.isRequired,
     isFetchingClub: PropTypes.bool.isRequired,
     isFetchingPosition: PropTypes.bool.isRequired,
     isFetchingPlayers: PropTypes.bool.isRequired,
@@ -64,16 +64,16 @@ class App extends Component {
   //dispatch API calls on mount
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(fetchDataIfNeeded('clubList', 'premTeams'))
-    dispatch(fetchDataIfNeeded('positionList', 'premElement_types'))
-    dispatch(fetchDataIfNeeded('playerList', 'premElements'))
+    dispatch(fetchDataIfNeeded('apiData__clubs', 'premTeams'))
+    dispatch(fetchDataIfNeeded('apiData__positions', 'premElement_types'))
+    dispatch(fetchDataIfNeeded('apiData__players', 'premElements'))
   }
 
   //invalidate and refresh playerList data
   handlePlayerRefreshClick = () => {
     const { dispatch } = this.props
-    dispatch(invalidateData('playerList'))
-    dispatch(fetchDataIfNeeded('playerList', 'premElements'))
+    dispatch(invalidateData('apiData__players'))
+    dispatch(fetchDataIfNeeded('apiData__players', 'premElements'))
   }
 
   //toggle filter view state
@@ -96,11 +96,11 @@ class App extends Component {
   render() {
     
     const {
-      data__clubs, 
+      apiData__clubs, 
       isFetchingClub, 
-      data__positions, 
+      apiData__positions, 
       isFetchingPosition, 
-      data__players, 
+      apiData__players, 
       isFetchingPlayers
     } = this.props
     
@@ -118,8 +118,8 @@ class App extends Component {
             <div  id="player-filters" className={"player-filters"} style={{ opacity: (isFetchingClub || isFetchingPosition) ? 0.2 : 1 }}>
               <FilterSlide show={this.state.showFilters}>
                 <FiltersContainer
-                  data__clubs={data__clubs}
-                  data__positions={data__positions} 
+                  apiData__clubs={apiData__clubs}
+                  apiData__positions={apiData__positions} 
                   onClick={() => this.handlePlayerRefreshClick} 
                   isFetching={isFetchingPlayers}
                 />
@@ -138,7 +138,7 @@ class App extends Component {
               className="player-list" 
               style={{ opacity: isFetchingPlayers ? 0.2 : 1 }}>
               <PlayerListContainer 
-                data__players={data__players} 
+                apiData__players={apiData__players} 
                 isFetching={isFetchingPlayers}
                 rowsPerRender={this.rowsPerRender}
               />
@@ -162,31 +162,31 @@ const mapStateToProps = state => {
   
   const {
     isFetching: isFetchingClub,
-    items: data__clubs
-  } = apiData['clubList'] || {
+    items: apiData__clubs
+  } = apiData['apiData__clubs'] || {
     isFetching: true,
     items: []
   }
   const {
     isFetching: isFetchingPosition,
-    items: data__positions
-  } = apiData['positionList'] || {
+    items: apiData__positions
+  } = apiData['apiData__positions'] || {
     isFetching: true,
     items: []
   }
   const {
     isFetching: isFetchingPlayers,
-    items: data__players
-  } = apiData['playerList'] || {
+    items: apiData__players
+  } = apiData['apiData__players'] || {
     isFetching: true,
     items: []
   }
   return {
-    data__clubs,
+    apiData__clubs,
     isFetchingClub,
-    data__positions,
+    apiData__positions,
     isFetchingPosition,
-    data__players, 
+    apiData__players, 
     isFetchingPlayers
   }
 }

@@ -26,7 +26,7 @@ const Row = ({playerId,fullName, cost, club, position, rank, form, selected , se
 export default class PlayerRow extends Component {
 	
 	static propTypes = {
-		data__players: PropTypes.array.isRequired,
+		apiData__players: PropTypes.array.isRequired,
 		togglePlayerSelect: PropTypes.func.isRequired,
 		rowsPerRender: PropTypes.number.isRequired
 	}
@@ -107,13 +107,13 @@ export default class PlayerRow extends Component {
 
 	render() {
 
-		const {data__players, rowsPerRender, data__clubs, data__positions} = this.props;
+		const {apiData__players, rowsPerRender, apiData__clubs, apiData__positions} = this.props;
 		const { selection__players } = this.props.selection
 
 		//returns new array of Rows from filtering players array, slicing it to the rowsPerRender value and mapping
 		return(
 			<ul>
-				{data__players.filter((player) => {
+				{apiData__players.filter((player) => {
 					return this.displayRow(player, this.fabricateRank(player.ict_index, player.now_cost))
 				}).slice(0, rowsPerRender).map((player) => {
 					return <Row 
@@ -129,8 +129,8 @@ export default class PlayerRow extends Component {
 							)
 						}
 						cost={player.now_cost}
-						club={data__clubs[player.team-1].short_name}
-						position={data__positions[player.element_type-1].plural_name_short}
+						club={apiData__clubs[player.team-1].short_name}
+						position={apiData__positions[player.element_type-1].plural_name_short}
 						rank={this.fabricateRank(player.ict_index, player.now_cost)} 
 						form={this.fabricateForm(player.ict_index)}
 						selected={this.playerSelected(selection__players, player.id)} 

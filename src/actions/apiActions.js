@@ -24,6 +24,14 @@ function receiveData(json, dataName) {
   }
 }
 
+function failedData(dataName) {
+  return {
+    type: types.FAILED_DATA,
+    dataName
+  }
+}
+
+
 
 //thunk action creators
 
@@ -33,6 +41,7 @@ function fetchData(dataName, dataSlug) {
     return fetch(`./api_dummy/${dataSlug}.json`)
       .then(response => response.json())
       .then(json => dispatch(receiveData(json, dataName)))
+      .catch(function(error) {dispatch(failedData(dataName))})
   }
 }
 

@@ -33,7 +33,7 @@ class PlayerListContainer extends Component {
     return (
       <div>
         {isEmpty
-          ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
+          ? (isFetching ? <h2>Loading...</h2> : <h2>No Data Found <span role="img" aria-label="Loudly Crying Face">😭</span></h2>)
           : <div>
               <PlayerRows 
                 apiData__players={apiData__players} 

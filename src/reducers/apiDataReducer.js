@@ -1,7 +1,8 @@
 import {
   INVALIDATE_DATA,
   REQUEST_DATA,
-  RECEIVE_DATA
+  RECEIVE_DATA,
+  FAILED_DATA
 } from '../constants/ActionTypes'
 
 function prepStateUpdate(
@@ -29,6 +30,10 @@ function prepStateUpdate(
         items: action.data_in,
         lastUpdated: action.receivedAt
       })
+    case FAILED_DATA:
+      return Object.assign({}, state, {
+        isFetching: false
+      })
     default:
       return state
   }
@@ -39,7 +44,8 @@ export default function apiData(state = {}, action) {
     case INVALIDATE_DATA:
     case RECEIVE_DATA:
     case REQUEST_DATA:
-      //console.log(action);
+    case FAILED_DATA:
+      console.log(action);
       return Object.assign({}, state, {
         [action.dataName]: prepStateUpdate(state[action.dataName], action)
       })

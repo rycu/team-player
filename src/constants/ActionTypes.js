@@ -10,6 +10,7 @@ export const RESET_FILTERS = 'RESET_FILTERS'
 export const INVALIDATE_DATA = 'INVALIDATE_DATA'
 export const REQUEST_DATA = 'REQUEST_DATA'
 export const RECEIVE_DATA = 'RECEIVE_DATA'
+export const FAILED_DATA = 'FAILED_DATA'
 
 //Team Selection
 export const UPDATE_TEAM_NAME = 'UPDATE_TEAM_NAME'

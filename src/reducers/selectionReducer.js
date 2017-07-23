@@ -28,9 +28,7 @@ export default function selection(state = initialState, action) {
 
 			if(newplayersArr.includes(action.id) === true){
 				var  i= newplayersArr.indexOf(action.id);
-				if(i !== -1) {
-					newplayersArr.splice(i, 1);
-				}
+				newplayersArr.splice(i, 1);
 			}else{
 				newplayersArr.push(action.id);
 			}

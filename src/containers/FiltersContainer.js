@@ -23,31 +23,30 @@ const FiltersContainer = ({filterState, apiData__clubs, apiData__positions, onCl
     <div>
 
     	<FilterByName 
+        className={filterClass +" player-filters__name"}
         nameTxt={filterState.filters__name} 
         updateNameFilter={actions.updateNameFilter} 
         placeholder="Search for player by name"
-        className={filterClass +" player-filters__name"}
       />
 
       <FilterByClub
+        className={filterClass +" player-filters__club"}
         apiData__clubs={apiData__clubs}
         clubId={filterState.filters__club} 
         updateClubFilter={actions.updateClubFilter}
-        className={filterClass +" player-filters__club"}
       />
 
       <FilterByPosition
+        className={filterClass +" player-filters__position"}
         apiData__positions={apiData__positions}
         positionArr={filterState.filters__position} 
         updatePositionFilter={actions.updatePositionFilter}
-        className={filterClass +" player-filters__position"}
       />
 
-      <DualRange 
-        componentId={'price'}
+      <DualRange
+        className={filterClass +" player-filters__price"}
         rangeObj={filterState.filters__price}
         updateRangeFilter={actions.updatePriceFilter}
-        className={filterClass +" player-filters__price"}
         min={0} 
         max={150}
         step={0.1}
@@ -56,11 +55,10 @@ const FiltersContainer = ({filterState, apiData__clubs, apiData__positions, onCl
         siblingValue={0}
       />
 
-      <DualRange 
-        componentId={'rank'}
-        rangeObj={filterState.filters__rank} 
-        updateRangeFilter={actions.updateRankFilter}
+      <DualRange
         className={filterClass +" player-filters__rank"}
+        rangeObj={filterState.filters__rank} 
+        updateRangeFilter={actions.updateRankFilter} 
         min={0} 
         max={10}
         step={0.1}
@@ -70,14 +68,14 @@ const FiltersContainer = ({filterState, apiData__clubs, apiData__positions, onCl
 
       <div>
         <Button
-          clickFunc={actions.resetFilters}
           className={filterClass +" player-filters__reset"}
+          clickFunc={actions.resetFilters}
           text={'Reset All Filters'}
         />
 
         <Button
-          clickFunc={onClick()}
-          className={filterClass +" player-filters__refresh"}      
+          className={filterClass +" player-filters__refresh"} 
+          clickFunc={onClick()}     
           text={isFetching ? 'Loading...' : 'Refresh Players'}
         />
       </div>

@@ -16,7 +16,7 @@ const initialState =
     filters__rank: {lowVal: 0, highVal: 10} 
   };
 
-//ES6 default argument syntax for state  s
+//ES6 default argument syntax for state
 export default function filters(state = initialState, action) {
 	switch (action.type) {
 
@@ -40,10 +40,8 @@ export default function filters(state = initialState, action) {
 			var newpositionArr = state.filters__position.slice();
 
 			if(action.checked === false){
-				var  i= newpositionArr.indexOf(action.id);
-				if(i !== -1) {
-					newpositionArr.splice(i, 1);
-				}
+				var  i = newpositionArr.indexOf(action.id);
+				newpositionArr.splice(i, 1);
 			}else{
 				newpositionArr.push(action.id);
 			}
@@ -55,14 +53,14 @@ export default function filters(state = initialState, action) {
 		case UPDATE_PRICE_FILTER:
 
 			return Object.assign({}, state, {
-				['filters__'+action.componentId]: {lowVal: action.lowVal, highVal: action.highVal} 
+				'filters__price': {lowVal: action.lowVal, highVal: action.highVal} 
 			})
 
 
 		case UPDATE_RANK_FILTER:
 
 			return Object.assign({}, state, {
-				['filters__'+action.componentId]: {lowVal: action.lowVal, highVal: action.highVal} 
+				'filters__rank': {lowVal: action.lowVal, highVal: action.highVal} 
 			})
 
 

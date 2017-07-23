@@ -24,18 +24,16 @@ export const updatePositionFilter = (checked, id) => ({
 			id
 })
 
-export const updatePriceFilter = (componentId, lowVal, highVal) => ({ 
+export const updatePriceFilter = (lowVal, highVal) => ({ 
 			
-			type: types.UPDATE_PRICE_FILTER, 
-			componentId,
+			type: types.UPDATE_PRICE_FILTER,
 			lowVal,
 			highVal
 })
 
-export const updateRankFilter = (componentId, lowVal, highVal) => ({ 
+export const updateRankFilter = (lowVal, highVal) => ({ 
 			
-			type: types.UPDATE_RANK_FILTER, 
-			componentId,
+			type: types.UPDATE_RANK_FILTER,
 			lowVal,
 			highVal
 })

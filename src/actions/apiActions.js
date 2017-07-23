@@ -31,8 +31,6 @@ function failedData(dataName) {
   }
 }
 
-
-
 //thunk action creators
 
 function fetchData(dataName, dataSlug) {

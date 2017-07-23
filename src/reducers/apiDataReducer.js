@@ -35,6 +35,7 @@ function prepStateUpdate(
         isFetching: false
       })
     default:
+      //Uncovered by tests as unreachable but included to suppress warnings
       return state
   }
 }
@@ -45,7 +46,7 @@ export default function apiData(state = {}, action) {
     case RECEIVE_DATA:
     case REQUEST_DATA:
     case FAILED_DATA:
-      console.log(action);
+      //console.log(action);
       return Object.assign({}, state, {
         [action.dataName]: prepStateUpdate(state[action.dataName], action)
       })

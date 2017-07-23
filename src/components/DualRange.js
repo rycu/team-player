@@ -5,7 +5,6 @@ export default class dualRange extends Component {
 	static propTypes = {
 		updateRangeFilter: PropTypes.func.isRequired,
 		rangeObj: PropTypes.object.isRequired,
-		componentId: PropTypes.string.isRequired,
 		min: PropTypes.number.isRequired, 
 		max: PropTypes.number.isRequired,
 		step: PropTypes.number.isRequired,
@@ -90,7 +89,6 @@ export default class dualRange extends Component {
 
 		overlapSubmitPromice.then(() =>{	
 			this.props.updateRangeFilter(
-	    		this.props.componentId,
 	    		this.valueRound(this.state.lowVal), 
 	    		this.valueRound(this.state.highVal)
 	    	);

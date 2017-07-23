@@ -28,7 +28,7 @@ describe('filters reducer', () => {
 	})
 
 	it('should handle REQUEST_DATA', () => {
-	
+
 		expect(
 			apiDataReducer({}, {
 				type: types.REQUEST_DATA,

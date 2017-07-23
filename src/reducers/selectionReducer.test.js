@@ -30,7 +30,7 @@ describe('filters reducer', () => {
 		)
 
 	})
-
+	
 	it('should handle TOGGLE_PLAYER_SELECT', () => {
 		
 		//Add player

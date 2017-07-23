@@ -8,14 +8,14 @@ export function invalidateData(dataName) {
   }
 }
 
-function requestData(dataName) {
+export function requestData(dataName) {
   return {
     type: types.REQUEST_DATA,
     dataName
   }
 }
 
-function receiveData(json, dataName) {
+export function receiveData(dataName, json) {
   return {
     type: types.RECEIVE_DATA,
     dataName,
@@ -24,7 +24,7 @@ function receiveData(json, dataName) {
   }
 }
 
-function failedData(dataName) {
+export function failedData(dataName) {
   return {
     type: types.FAILED_DATA,
     dataName
@@ -33,17 +33,17 @@ function failedData(dataName) {
 
 //thunk action creators
 
-function fetchData(dataName, dataSlug) {
+export function fetchData(dataName, dataSlug) {
   return dispatch => {
     dispatch(requestData(dataName))
-    return fetch(`./api_dummy/${dataSlug}.json`)
+    return fetch(`../api_dummy/${dataSlug}.json`)
       .then(response => response.json())
-      .then(json => dispatch(receiveData(json, dataName)))
+      .then(json => dispatch(receiveData(dataName, json)))
       .catch(function(error) {dispatch(failedData(dataName))})
   }
 }
 
-function shouldFetchData(dataName, state) {
+export function shouldFetchData(dataName, state) {
   const data = state.apiData[dataName]
   if (!data) {
     return true

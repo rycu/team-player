@@ -36,10 +36,10 @@ export function failedData(dataName) {
 export function fetchData(dataName, dataSlug) {
   return dispatch => {
     dispatch(requestData(dataName))
-    return fetch(`../api_dummy/${dataSlug}.json`)
+    return fetch(`https://ryancutter.co.uk/labs/test_data/premierleague_06_07/${dataSlug}.php`)
       .then(response => response.json())
       .then(json => dispatch(receiveData(dataName, json)))
-      .catch(function(error) {dispatch(failedData(dataName))})
+      .catch(error => dispatch(failedData(dataName)))
   }
 }
 

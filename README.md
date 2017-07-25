@@ -4,7 +4,7 @@ curently in development!
 
 React and Redux Example app.  
 
-team-player is a fantasy football picker with a retro UX.
+team-player will be a fantasy football picker with a retro UX.
 
 
 ## Technologies
@@ -12,6 +12,7 @@ team-player is a fantasy football picker with a retro UX.
 - React	(react-dom, react-redux, react-transition-group)
 - Redux (redux-logger, redux-thunk)
 - Sass 	(node-sass)
+- Jest  (nock, redux-mock-store)
 
 
 ## Features

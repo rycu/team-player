@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 
-export default class FilterByClub extends Component {
+export default class FilterByPosition extends Component {
 	
 	static propTypes = {
 		apiData__positions: PropTypes.array.isRequired,
 		updatePositionFilter: PropTypes.func.isRequired,
-		positionArr: PropTypes.array.isRequired
+		positionArr: PropTypes.array.isRequired,
+		className: PropTypes.string.isRequired
 	};
 
 	handleChange = e => {
@@ -39,7 +40,7 @@ export default class FilterByClub extends Component {
 			rows.push(self.renderCheckbox(thisVal));
 		})
 		return(
-			<ul>
+			<ul className={this.props.className}>
 				{rows}
 			</ul>
 		);
@@ -48,10 +49,6 @@ export default class FilterByClub extends Component {
 	}
 
 	render() {
-		return (
-			<div className={this.props.className}>
-				{this.buildPosBoxes()}
-			</div>
-    	);
+		return this.buildPosBoxes()
 	}
 }

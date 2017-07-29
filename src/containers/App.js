@@ -126,11 +126,13 @@ class App extends Component {
               </FilterSlide>
             </div>
 
-            <Button
-              clickFunc={this.handleFilterViewToggleClick}
-              className={"toggle-filter-view-button"}
-              text={this.state.showFilters ? 'hide filters' : 'filter players'}
-            />
+            <div>
+              <Button
+                clickFunc={this.handleFilterViewToggleClick}
+                className={"toggle-filter-view-button"}
+                text={this.state.showFilters ? 'hide filters' : 'filter players'}
+              />
+            </div>
 
             <div 
               id="scroll-box" 

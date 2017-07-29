@@ -4,10 +4,10 @@ import React, { Component } from 'react'
 export default class Header extends Component {
   render() {
     return (      
-      <div className="header">
+      <header className="header">
         {/*<IconLogo FillColor="lime"/>*/}
         <h2>team-player (in production)</h2>
-      </div>
+      </header>
     );
   }
 }

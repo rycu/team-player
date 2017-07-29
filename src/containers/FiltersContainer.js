@@ -52,7 +52,6 @@ const FiltersContainer = ({filterState, apiData__clubs, apiData__positions, onCl
         step={0.1}
         gap={10}
         unit={'M'}
-        siblingValue={0}
       />
 
       <DualRange

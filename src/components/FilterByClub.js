@@ -11,7 +11,7 @@ export default class FilterByClub extends Component {
 	};
 
 	handleChange = e => {
-		const clubId = e.target.value.trim()
+		const clubId = e.target.value
 	    this.props.updateClubFilter(Number(clubId));
 	}
 
@@ -19,17 +19,16 @@ export default class FilterByClub extends Component {
 		let {clubId, apiData__clubs, className} = this.props;
 
 		return (
-			<div className={className}>
-				<select 
-					value={clubId}
-					onChange={this.handleChange}
-				>
-					<option value='' key="0">All Premier League Clubs</option>
-					{apiData__clubs.map((club) =>
-						<option value={club.id} key={club.id}>{club.name}</option>
-					)}
-				</select>
-			</div>
+			<select 
+				className={className}
+				value={clubId}
+				onChange={this.handleChange}
+			>
+				<option value='' key="0">All Premier League Clubs</option>
+				{apiData__clubs.map((club) =>
+					<option value={club.id} key={club.id}>{club.name}</option>
+				)}
+			</select>
     	);
 	}
 }

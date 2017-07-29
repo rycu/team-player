@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 
-export default class dualRange extends Component {
+export default class DualRange extends Component {
 	static propTypes = {
 		updateRangeFilter: PropTypes.func.isRequired,
 		rangeObj: PropTypes.object.isRequired,
@@ -64,7 +64,7 @@ export default class dualRange extends Component {
 	}
 
 	handleChange = e => {
-		this.updateState(e.target.id, e.target.value, e.target.dataset.siblingvalue);
+		this.updateState(e.target.id, e.target.value);
 	}
 
 	//Round floating points for steps less than 1

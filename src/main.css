@@ -519,24 +519,23 @@ body {
   flex-direction: column; }
   .player-selection .player-list {
     overflow: auto; }
-  .player-selection .toggle-filter-view-button button {
+  .player-selection .toggle-filter-view-button {
     width: 100%; }
 
-.player-filters__name input {
+.player-filters__name {
   width: 100%; }
 
-.player-filters__club select {
+.player-filters__club {
   width: 100%; }
 
-.player-filters__position ul {
+.player-filters__position {
   padding: 0;
   margin: 0.2em 0;
   height: 1.8em; }
-
-.player-filters__position li {
-  display: inline-block;
-  width: 25%;
-  text-align: center; }
+  .player-filters__position li {
+    display: inline-block;
+    width: 25%;
+    text-align: center; }
 
 .player-filters__reset {
   display: inline-block;

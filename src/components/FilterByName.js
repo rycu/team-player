@@ -19,26 +19,20 @@ export default class FilterByName extends Component {
 	}
 
 	handleChange = e => {
-	    const nameTxt = e.target.value.trim();
-	    this.props.updateNameFilter(nameTxt);
+	    const nameTxt = e.target.value.trim()
+	    this.props.updateNameFilter(nameTxt)
 	}
 
 	render() {
 		let {placeholder, nameTxt, className} = this.props
-		
 		return (
-			<div className={className}>
-
-				<input 
-					type="text" 
-					placeholder={placeholder}
-					value={nameTxt}
-					onChange={this.handleChange}
-				/>
-
-			</div>
+			<input 
+				className={className}
+				type="text" 
+				placeholder={placeholder}
+				value={nameTxt}
+				onChange={this.handleChange}
+			/>
     	);
 	}
 }
-
-

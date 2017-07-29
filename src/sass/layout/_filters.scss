@@ -4,24 +4,18 @@
 
 
 .player-filters__name{
-	input{
-		width: 100%;
-	}
+	width: 100%;
 }
 
 .player-filters__club{
-	select{
-		width: 100%;
-	}
+	width: 100%;
 }
 
 .player-filters__position{
 	
-	ul{
-		padding:0;
-		margin: 0.2em 0;
-		height:1.8em;
-	}
+	padding:0;
+	margin: 0.2em 0;
+	height:1.8em;
 
 	li{
 		display: inline-block;

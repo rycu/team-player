@@ -36,6 +36,7 @@ export function failedData(dataName) {
 export function fetchData(dataName, dataSlug) {
   return dispatch => {
     dispatch(requestData(dataName))
+    //API WILL BE UPDATED TO NODE 
     return fetch(`https://ryancutter.co.uk/labs/test_data/premierleague_06_07/${dataSlug}.php`)
       .then(response => response.json())
       .then(json => dispatch(receiveData(dataName, json)))

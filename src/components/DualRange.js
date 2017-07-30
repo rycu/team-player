@@ -20,10 +20,10 @@ export default class DualRange extends Component {
 
 	componentWillReceiveProps(nextProps){
 		//Gets new state from props if updated
-			this.setState({
-				lowVal: nextProps.rangeObj.lowVal,
-				highVal: nextProps.rangeObj.highVal
-			})
+		this.setState({
+			lowVal: nextProps.rangeObj.lowVal,
+			highVal: nextProps.rangeObj.highVal
+		})
 	}
 
 	//Ensures correct minimum value range is maintained 
@@ -41,8 +41,6 @@ export default class DualRange extends Component {
 				highVal: highVal,
 				lowVal: highVal-this.props.gap
 			})
-		}else if (id !== 'low' && id !== 'high'){
-			console.log('overlapCorrect bad ID: '+ id);
 		}
 	}
 
@@ -55,9 +53,9 @@ export default class DualRange extends Component {
 			//Only update thumb within limits
 			(id === 'low' && value >= this.props.min && value <= lowMax) ||
 			(id === 'high' && value >= highMin && value <= this.props.max)
-			){
+		){
 			this.setState({
-					[id+'Val']: parseFloat(value),
+			[id+'Val']: parseFloat(value),
 			})
 		}
 		this.overlapCorrect(id);
@@ -79,15 +77,18 @@ export default class DualRange extends Component {
 	//Updates redux store
 	handleSubmit = e => {
 		
-		let id = e.target.id;
+		var id = e.target.id;
 
 		//Promise added to wait for overlapCorrect() to complete before store update
-		let overlapSubmitPromice = new Promise((resolve, reject) => {
-				resolve(this.overlapCorrect(id));
-				reject('overlapCorrect Failed');
+		var overlapSubmitPromise = new Promise((resolve, reject) => {
+				if(id === 'low' || id === 'high'){
+					resolve(this.overlapCorrect(id));
+				}else{
+					reject(`bad Id (${id}) passed to handleSubmit`);
+				}
 		})
 
-		overlapSubmitPromice.then(() =>{	
+		overlapSubmitPromise.then(() =>{	
 			this.props.updateRangeFilter(
 	    		this.valueRound(this.state.lowVal), 
 	    		this.valueRound(this.state.highVal)
@@ -96,6 +97,8 @@ export default class DualRange extends Component {
 		.catch((err) =>{
 			console.log(err);
 		});
+
+		return overlapSubmitPromise
 	}
 
 	render() {

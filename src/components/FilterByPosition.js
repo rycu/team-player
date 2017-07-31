@@ -18,7 +18,6 @@ export default class FilterByPosition extends Component {
 
 		let {positionArr, apiData__positions} = this.props
 		let checked = positionArr.includes(thisVal) ? true : false
-
 		return(
 			<li key={thisVal}>
 				<label htmlFor={thisVal}>{apiData__positions[thisVal-1].plural_name_short}</label>

@@ -9,7 +9,7 @@ describe('components', () => {
   describe('Header', () => {
     it('should render correctly', () => {
     	expect(output.node.type).toBe('header')
-      expect(output.node.props.className).toBe('header')
+		expect(output.node.props.className).toBe('header')
     })
   })
 })

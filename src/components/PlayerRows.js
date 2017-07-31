@@ -27,8 +27,12 @@ export default class PlayerRow extends Component {
 	
 	static propTypes = {
 		apiData__players: PropTypes.array.isRequired,
+		apiData__positions: PropTypes.array.isRequired,
+		apiData__clubs: PropTypes.array.isRequired,
 		togglePlayerSelect: PropTypes.func.isRequired,
-		rowsPerRender: PropTypes.number.isRequired
+		rowsPerRender: PropTypes.number.isRequired,
+		filters: PropTypes.object.isRequired,
+		selection: PropTypes.object.isRequired
 	}
 
 	//Checks to see if the row should be displayed under the current filter conditions
@@ -40,6 +44,7 @@ export default class PlayerRow extends Component {
 				filters__price, 
 				filters__rank 
 			} = this.props.filters
+
 
 		let playerName = player.first_name + ' ' + player.second_name; 
 		
@@ -110,9 +115,14 @@ export default class PlayerRow extends Component {
 		const {apiData__players, rowsPerRender, apiData__clubs, apiData__positions} = this.props;
 		const { selection__players } = this.props.selection
 
+		//{id, first_name, second_name, web_name, element_type, team, now_cost, ict_index}
+
 		//returns new array of Rows from filtering players array, slicing it to the rowsPerRender value and mapping
 		return(
 			<ul>
+
+
+
 				{apiData__players.filter((player) => {
 					return this.displayRow(player, this.fabricateRank(player.ict_index, player.now_cost))
 				}).slice(0, rowsPerRender).map((player) => {

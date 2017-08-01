@@ -86,29 +86,27 @@ FiltersContainer.propTypes = {
   filterState: PropTypes.object.isRequired,
   apiData__positions: PropTypes.array.isRequired,
   apiData__clubs: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  onClick: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  actions: PropTypes.object.isRequired,
 }
-
 
 const mapStateToProps = state => ({
   filterState: state.filters
 })
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators({ 
-      updateNameFilter, 
-      updateClubFilter, 
-      updatePositionFilter, 
-      updatePriceFilter,
-      updateRankFilter,
-      resetFilters
-    }, dispatch)
+  actions: bindActionCreators({ 
+    updateNameFilter, 
+    updateClubFilter, 
+    updatePositionFilter, 
+    updatePriceFilter,
+    updateRankFilter,
+    resetFilters
+  }, dispatch)
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-
 )(FiltersContainer)
-
-

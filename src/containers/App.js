@@ -9,6 +9,8 @@ import PitchContainer from './PitchContainer'
 import Button from '../components/Button'
 import Transition from 'react-transition-group/Transition'
 
+import ReactDOM from 'react-dom'
+
 
 //Stateless ES6 Function component the slide transition of the filters component
 const FilterSlide = ({children, show}) => {
@@ -38,10 +40,9 @@ const FilterSlide = ({children, show}) => {
 }
 
 FilterSlide.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.object,
   show: PropTypes.bool.isRequired,
 }
-
 
 //Main App component 
 class App extends Component {
@@ -56,7 +57,7 @@ class App extends Component {
     dispatch: PropTypes.func.isRequired
   }
 
-  //hide filters as default
+  //hide filters by default
   state = {
     showFilters:false
   }
@@ -77,19 +78,20 @@ class App extends Component {
   }
 
   //toggle filter view state
-  handleFilterViewToggleClick = e => {
+  handleFilterViewToggleClick = () => {
     this.setState({showFilters: !this.state.showFilters})
   }
 
   //Infinite scroll(ish) for PlayerListContainer 
   rowsPerRender = 30
   handlePlayerListScroll = e => {
-    let boxHeight = document.getElementById(e.target.id).clientHeight;
+    let boxHeight = ReactDOM.findDOMNode(this.refs[e.target.ref]).clientHeight;
     let offset = (Number(e.target.scrollHeight)-Number(boxHeight));
     if (e.target.scrollTop >= (offset-(offset/10))) {
       this.rowsPerRender += 15;
       this.forceUpdate();
     }
+    return this.rowsPerRender
   }
 
   //Finally the render
@@ -117,16 +119,16 @@ class App extends Component {
 
             <div  id="player-filters" className={"player-filters"} style={{ opacity: (isFetchingClub || isFetchingPosition) ? 0.2 : 1 }}>
               <FilterSlide show={this.state.showFilters}>
-                <FiltersContainer
-                  apiData__clubs={apiData__clubs}
-                  apiData__positions={apiData__positions} 
-                  onClick={() => this.handlePlayerRefreshClick} 
-                  isFetching={isFetchingPlayers}
-                />
+               <FiltersContainer
+                                 apiData__clubs={apiData__clubs}
+                                 apiData__positions={apiData__positions} 
+                                 onClick={() => this.handlePlayerRefreshClick} 
+                                 isFetching={isFetchingPlayers}
+                               />
               </FilterSlide>
             </div>
 
-            <div>
+            <div id="filters-toggle">
               <Button
                 clickFunc={this.handleFilterViewToggleClick}
                 className={"toggle-filter-view-button"}
@@ -135,15 +137,16 @@ class App extends Component {
             </div>
 
             <div 
-              id="scroll-box" 
+              id="scroll-box"
+              ref="scroll-box"
               onScroll={this.handlePlayerListScroll} 
               className="player-list" 
               style={{ opacity: isFetchingPlayers ? 0.2 : 1 }}>
-              <PlayerListContainer 
-                apiData__players={apiData__players} 
-                isFetching={isFetchingPlayers}
-                rowsPerRender={this.rowsPerRender}
-              />
+                <PlayerListContainer 
+                  apiData__players={apiData__players} 
+                  isFetching={isFetchingPlayers}
+                  rowsPerRender={this.rowsPerRender}
+                />
             </div>
 
             <div>

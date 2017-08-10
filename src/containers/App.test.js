@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store'
 import actions from '../actions/apiActions'
 import thunk from 'redux-thunk'
+import ReactDOM from 'react-dom'
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
@@ -87,17 +88,25 @@ describe('containers', () => {
       //expect(fullDOM.props()).toEqual(Object.assign({}, props, {store}))
     })
 
-    //ADAPT FOR getElementById
-    // it('should onScroll of scroll-box run handlePlayerListScroll and add 15 to rowsPerRender each time scroll reaches 90%', () => {
-    //   const { fullDOM } = setup()
-    //   let scrollBoxProps = fullDOM.find('#scroll-box').props()
-    //   let scrollAt1 = {target: { ref:'scroll-box', scrollHeight:100, scrollTop:1 } }
-    //   let scrollAt90 = {target: { ref:'scroll-box', scrollHeight:100, scrollTop:90 } }
-    //   expect(scrollBoxProps.onScroll(scrollAt1)).toBe(30)
-    //   expect(scrollBoxProps.onScroll(scrollAt90)).toBe(45)
-    //   expect(scrollBoxProps.onScroll(scrollAt1)).toBe(45)
-    //   expect(scrollBoxProps.onScroll(scrollAt90)).toBe(60)
-    // })
+    describe('Infinite scroll(ish)', () => {
+
+      const { fullDOM } = setup()
+      let scrollBoxProps = fullDOM.find('#player-list__scroll-box').props()
+      let scrollAt1 = {target: { id:'player-list__scroll-box', scrollHeight:100, scrollTop:1 } }
+        let scrollAt90 = {target: { id:'player-list__scroll-box', scrollHeight:100, scrollTop:90 } }
+
+      it('should onScroll of scroll-box run handlePlayerListScroll', () => {
+        expect(scrollBoxProps.onScroll(scrollAt1)).toBe(30)
+      })
+
+      it('should add 15 to rowsPerRender each time scroll reaches 90%', () => {       
+        expect(scrollBoxProps.onScroll(scrollAt90)).toBe(45)
+        expect(scrollBoxProps.onScroll(scrollAt1)).toBe(45)
+        expect(scrollBoxProps.onScroll(scrollAt90)).toBe(60)
+      })
+    })
+
+
 
     it('should run handleFilterViewToggleClick onClick', () => {
       const { fullDOM } = setup()

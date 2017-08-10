@@ -8,8 +8,7 @@ import PlayerListContainer from './PlayerListContainer'
 import PitchContainer from './PitchContainer'
 import Button from '../components/Button'
 import Transition from 'react-transition-group/Transition'
-
-//import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom'
 
 
 //Stateless ES6 Function component the slide transition of the filters component
@@ -85,8 +84,7 @@ class App extends Component {
   //Infinite scroll(ish) for PlayerListContainer 
   rowsPerRender = 30
   handlePlayerListScroll = e => {
-    let boxHeight = document.getElementById(e.target.id).clientHeight;
-    //let boxHeight = ReactDOM.findDOMNode(this.refs[e.target.ref]).clientHeight;
+    let boxHeight = ReactDOM.findDOMNode(this.refs[e.target.id]).clientHeight;
     let offset = (Number(e.target.scrollHeight)-Number(boxHeight));
     if (e.target.scrollTop >= (offset-(offset/10))) {
       this.rowsPerRender += 15;
@@ -137,9 +135,9 @@ class App extends Component {
               />
             </div>
 
-            <div 
-              id="scroll-box"
-              ref="scroll-box"
+            <div
+              id="player-list__scroll-box"
+              ref="player-list__scroll-box"
               onScroll={this.handlePlayerListScroll} 
               className="player-list" 
               style={{ opacity: isFetchingPlayers ? 0.2 : 1 }}>

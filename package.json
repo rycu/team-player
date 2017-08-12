@@ -41,5 +41,8 @@
   "bugs": {
     "url": "https://github.com/rycu/team-player/issues"
   },
-  "homepage": "./"
+  "homepage": "./",
+  "jest": {
+    "collectCoverageFrom" : ["**/*.{js,jsx}", "!**/node_modules/**", "!**/coverage/**", "!**/src/registerServiceWorker.js", "!**/src/index.js"]
+  }
 }

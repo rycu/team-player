@@ -30,13 +30,10 @@ function prepStateUpdate(
         items: action.data_in,
         lastUpdated: action.receivedAt
       })
-    case FAILED_DATA:
+    default: //FAILED_DATA
       return Object.assign({}, state, {
         isFetching: false
       })
-    default:
-      //Uncovered by tests as unreachable but included to suppress warnings
-      return state
   }
 }
 

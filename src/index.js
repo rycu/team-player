@@ -9,6 +9,8 @@ import reducer from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 import './main.css';
 
+//console.log(process.env.NODE_ENV)
+
 const middleware = [ thunk ];
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger());
@@ -23,7 +25,7 @@ render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
-);
+  document.getElementById('root') || document.createElement('div') //TEST HACK
+)
 
 registerServiceWorker();

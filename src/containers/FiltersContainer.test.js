@@ -21,7 +21,7 @@ const setup = testProps => {
   const props = Object.assign({
     apiData__positions: [],
     apiData__clubs: [],
-    onClick: mockOnClick,
+    playerRefreshClick: mockOnClick,
     isFetching: false,
   }, testProps)
 
@@ -40,7 +40,6 @@ describe('containers', () => {
 
     it('should render correctly', () => {
       const { fullDOM, props, store} = setup()
-      //console.log(fullDOM.node)
       expect(fullDOM.length).toBeTruthy();
       expect(fullDOM.props()).toEqual(Object.assign({}, props, {store}))
     })

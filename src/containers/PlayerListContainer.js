@@ -31,7 +31,7 @@ class PlayerListContainer extends Component {
     const isEmpty = apiData__players.length === 0
 
     return (
-      <div>
+      <div id="playerList">
         {isEmpty
           ? (isFetching ? <h2>Loading...</h2> : <h2>No Data Found <span role="img" aria-label="Loudly Crying Face">😭</span></h2>)
           : <div>

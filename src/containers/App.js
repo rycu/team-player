@@ -87,7 +87,7 @@ class App extends Component {
     let boxHeight = ReactDOM.findDOMNode(this.refs[e.target.id]).clientHeight;
     let offset = (Number(e.target.scrollHeight)-Number(boxHeight));
     if (e.target.scrollTop >= (offset-(offset/10))) {
-      this.rowsPerRender += 15;
+      this.rowsPerRender += 15; 
       this.forceUpdate();
     }
     return this.rowsPerRender
@@ -121,7 +121,7 @@ class App extends Component {
                <FiltersContainer
                                  apiData__clubs={apiData__clubs}
                                  apiData__positions={apiData__positions} 
-                                 onClick={() => this.handlePlayerRefreshClick} 
+                                 playerRefreshClick={() => this.handlePlayerRefreshClick} 
                                  isFetching={isFetchingPlayers}
                                />
               </FilterSlide>
@@ -141,7 +141,7 @@ class App extends Component {
               onScroll={this.handlePlayerListScroll} 
               className="player-list" 
               style={{ opacity: isFetchingPlayers ? 0.2 : 1 }}>
-                <PlayerListContainer 
+                <PlayerListContainer
                   apiData__players={apiData__players} 
                   isFetching={isFetchingPlayers}
                   rowsPerRender={this.rowsPerRender}
@@ -163,25 +163,30 @@ class App extends Component {
 
 const mapStateToProps = state => {
   const { apiData } = state
-  
+
   const {
     isFetching: isFetchingClub,
     items: apiData__clubs
-  } = apiData['apiData__clubs'] || {
+  } = apiData['apiData__clubs'] 
+  || {
     isFetching: true,
     items: []
   }
+
   const {
     isFetching: isFetchingPosition,
     items: apiData__positions
-  } = apiData['apiData__positions'] || {
+  } = apiData['apiData__positions'] 
+  || {
     isFetching: true,
     items: []
   }
+
   const {
     isFetching: isFetchingPlayers,
     items: apiData__players
-  } = apiData['apiData__players'] || {
+  } = apiData['apiData__players'] 
+  || {
     isFetching: true,
     items: []
   }
@@ -190,7 +195,7 @@ const mapStateToProps = state => {
     isFetchingClub,
     apiData__positions,
     isFetchingPosition,
-    apiData__players, 
+    apiData__players,
     isFetchingPlayers
   }
 }

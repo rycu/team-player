@@ -19,7 +19,7 @@ import {
 
 let filterClass = 'player-filters';
 
-const FiltersContainer = ({filterState, apiData__clubs, apiData__positions, onClick, isFetching, actions}) => (
+const FiltersContainer = ({filterState, apiData__clubs, apiData__positions, playerRefreshClick, isFetching, actions}) => (
     <div>
 
     	<FilterByName 
@@ -74,7 +74,7 @@ const FiltersContainer = ({filterState, apiData__clubs, apiData__positions, onCl
 
         <Button
           className={filterClass +" player-filters__refresh"} 
-          clickFunc={onClick()}     
+          clickFunc={playerRefreshClick()}     
           text={isFetching ? 'Loading...' : 'Refresh Players'}
         />
       </div>
@@ -86,7 +86,7 @@ FiltersContainer.propTypes = {
   filterState: PropTypes.object.isRequired,
   apiData__positions: PropTypes.array.isRequired,
   apiData__clubs: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired,
+  playerRefreshClick: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   actions: PropTypes.object.isRequired,
 }
